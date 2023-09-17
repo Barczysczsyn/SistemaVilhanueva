@@ -8,7 +8,7 @@ package view.pesquisas;
 import bean.VendedorJmbv;
 import dao.Vendedor_DAO;
 import java.util.List;
-import view.JDlgVendedor;
+import view.JDlgVendedorNovoIA;
 
 /**
  *
@@ -16,7 +16,7 @@ import view.JDlgVendedor;
  */
 public class JDlgVendedorPesquisa extends javax.swing.JDialog {
     
-    private JDlgVendedor jDlgVendedor;
+    private JDlgVendedorNovoIA jDlgVendedor;
     private VendedorControle vendedorControle;//invoca o vendedor controle para controla-lo
     /**
      * Creates new form NewJDlgVendedorPesquisa
@@ -32,7 +32,7 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
         
         setLocationRelativeTo(null);
     }
-    public void setTelaPai(JDlgVendedor jDlgVendedor){
+    public void setTelaPai(JDlgVendedorNovoIA jDlgVendedor){
         this.jDlgVendedor = jDlgVendedor;
     }
 
@@ -115,7 +115,7 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
         // TODO add your handling code here:
         int rowSel = jTable1_jmbv.getSelectedRow();
         VendedorJmbv vendedor = vendedorControle.getBean(rowSel);
-        jDlgVendedor.beanView(vendedor);
+        //jDlgVendedor.beanView(vendedor);
         setVisible(false);
     }//GEN-LAST:event_jBtnOK_jmbvActionPerformed
 

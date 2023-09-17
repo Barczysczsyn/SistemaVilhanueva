@@ -12,12 +12,12 @@ import tools.Util;
  *
  * @author jmbvi
  */
-public class JDlgVendasNovo extends javax.swing.JDialog {
+public class JDlgVendedorNovo extends javax.swing.JDialog {
 
     /**
      * Creates new form JDlgUsuariosNovo
      */
-    public JDlgVendasNovo(java.awt.Frame parent, boolean modal) {
+    public JDlgVendedorNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de usuários");
@@ -37,9 +37,9 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jBtnIncluir = new javax.swing.JButton();
-        jBtnAlterar = new javax.swing.JButton();
-        jBtnExcluir = new javax.swing.JButton();
+        jBtnIncluir_jmbv = new javax.swing.JButton();
+        jBtnAlterar_jmbv = new javax.swing.JButton();
+        jBtnExcluir_jmbv = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -61,29 +61,29 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
-        jBtnIncluir.setText("Incluir");
-        jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
+        jBtnIncluir_jmbv.setText("Incluir");
+        jBtnIncluir_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIncluirActionPerformed(evt);
+                jBtnIncluir_jmbvActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnIncluir);
+        jPanel2.add(jBtnIncluir_jmbv);
 
-        jBtnAlterar.setText("Alterar");
-        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnAlterar_jmbv.setText("Alterar");
+        jBtnAlterar_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAlterarActionPerformed(evt);
+                jBtnAlterar_jmbvActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnAlterar);
+        jPanel2.add(jBtnAlterar_jmbv);
 
-        jBtnExcluir.setText("Excluir");
-        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        jBtnExcluir_jmbv.setText("Excluir");
+        jBtnExcluir_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirActionPerformed(evt);
+                jBtnExcluir_jmbvActionPerformed(evt);
             }
         });
-        jPanel2.add(jBtnExcluir);
+        jPanel2.add(jBtnExcluir_jmbv);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,24 +135,24 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+    private void jBtnIncluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_jmbvActionPerformed
         // TODO add your handling code here:
         JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
         jDlgProdutosNovoIA.setVisible(true);
-    }//GEN-LAST:event_jBtnIncluirActionPerformed
+    }//GEN-LAST:event_jBtnIncluir_jmbvActionPerformed
 
-    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+    private void jBtnAlterar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_jmbvActionPerformed
         // TODO add your handling code here:
         JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
         jDlgProdutosNovoIA.setVisible(true);
-    }//GEN-LAST:event_jBtnAlterarActionPerformed
+    }//GEN-LAST:event_jBtnAlterar_jmbvActionPerformed
 
-    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+    private void jBtnExcluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_jmbvActionPerformed
         // TODO add your handling code here:
         if(Util.perguntar("Ddeseja excluir o produto") == true){
             
         }
-    }//GEN-LAST:event_jBtnExcluirActionPerformed
+    }//GEN-LAST:event_jBtnExcluir_jmbvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,14 +171,26 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendedorNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendedorNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendedorNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendedorNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -187,7 +199,7 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgVendasNovo dialog = new JDlgVendasNovo(new javax.swing.JFrame(), true);
+                JDlgVendedorNovo dialog = new JDlgVendedorNovo(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -200,9 +212,9 @@ public class JDlgVendasNovo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAlterar;
-    private javax.swing.JButton jBtnExcluir;
-    private javax.swing.JButton jBtnIncluir;
+    private javax.swing.JButton jBtnAlterar_jmbv;
+    private javax.swing.JButton jBtnExcluir_jmbv;
+    private javax.swing.JButton jBtnIncluir_jmbv;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
