@@ -5,7 +5,7 @@
  */
 package view.pesquisas;
 
-import bean.Produtos;
+import bean.ProdutosJmbv;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,40 +16,46 @@ import javax.swing.table.AbstractTableModel;
 public class ProdutosControle extends AbstractTableModel {
     List lista;
     
+    
     public void setList(List lista){
         this.lista = lista;
+        System.out.println("setlist");
     }
-    public Produtos getBean(int linha){
-        return (Produtos) lista.get(linha);
+    public ProdutosJmbv getBean(int linha){
+        System.out.println("getbean");
+        return (ProdutosJmbv) lista.get(linha);
     }
     @Override
     public int getRowCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("rowcount");
         return lista.size();
     }
 
     @Override
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("columncount");
         return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. return
-        Produtos produtos = (Produtos) lista.get(rowIndex);
+        ProdutosJmbv produtos = (ProdutosJmbv) lista.get(rowIndex);
+        System.out.println("getvalueat" + rowIndex + "e" + columnIndex);
 
         if (columnIndex == 0) {
-            return produtos.getIdProdutos();
+            return produtos.getIdprodutosJmbv();
         }
         if (columnIndex == 1) {
-            return produtos.getNome();
+            return produtos.getNomeJmbv();
         }
         if (columnIndex == 2) {
-            return produtos.getPreco();
+            return produtos.getPrecoJmbv();
         }
         if (columnIndex == 3) {
-            return produtos.getMarca();
+            return produtos.getMarcaJmbv();
         }
 
         return "conteudo";

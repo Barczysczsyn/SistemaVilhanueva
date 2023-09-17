@@ -9,7 +9,7 @@ import view.pesquisas.JDlgVendedorPesquisa;
 import aulas.*;
 import java.awt.Color;
 import dao.Vendedor_DAO;
-import bean.Vendedor;
+import bean.VendedorJmbv;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -423,7 +423,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
         
         
         
-        Vendedor vendedor = viewBean();
+        VendedorJmbv vendedor = viewBean();
         
         Vendedor_DAO vendedor_DAO = new Vendedor_DAO();//executa o dao
         if(incluindo == true){
@@ -451,7 +451,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
         //if(resp == 0){//0 e o sim
         if(resp == JOptionPane.YES_OPTION){//constante serve pra deixar  o codigo mais claro//classe usando um metodo estatico, estatico nao precisa instanciar a classe
         
-        Vendedor vendedor = viewBean();
+        VendedorJmbv vendedor = viewBean();
         Vendedor_DAO vendedor_DAO = new Vendedor_DAO();//executa o dao
         vendedor_DAO.delete(vendedor);
         
@@ -500,49 +500,42 @@ public class JDlgVendedor extends javax.swing.JDialog {
     
     
         
-         public Vendedor viewBean(){
-        Vendedor vendedor = new Vendedor();
+         public VendedorJmbv viewBean(){
+        VendedorJmbv vendedor = new VendedorJmbv();
         int id = Integer.valueOf(jTxtCodigo.getText());
-        vendedor.setIdVendedor(id);
-        vendedor.setNome(jTxtNome.getText());
-        vendedor.setCpf(jFmtCpf.getText());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            vendedor.setDataNascimento(formato.parse(jFmtDataNascimento.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro: " + ex.getMessage());
-        }
-        vendedor.setCep(jFmtCep.getText());
-        vendedor.setEndereco(jTxtEndereco.getText());
-        vendedor.setCelular(jFmtCelular.getText());
+        vendedor.setIdvendedorJmbv(id);
+        vendedor.setNomeJmbv(jTxtNome.getText());
+        vendedor.setCpfJmbv(jFmtCpf.getText());
+        vendedor.setDataNascimentoJmbv(Util.strDate(jFmtDataNascimento.getText()));
+        vendedor.setCepJmbv(jFmtCep.getText());
+        vendedor.setEnderecoJmbv(jTxtEndereco.getText());
+        vendedor.setNumeroJmbv(jFmtCelular.getText());
         //vendedor.setCidade(jTxtCidade.getText());
-        vendedor.setBairro(jTxtBairro.getText());
-        vendedor.setComplemento(jTxtComplemento.getText());
-        vendedor.setEmail(jTxtEmail.getText());
-        vendedor.setRg(jFmtRg.getText());
+        vendedor.setBairroJmbv(jTxtBairro.getText());
+        vendedor.setComplementoJmbv(jTxtComplemento.getText());
+        vendedor.setEmailJmbv(jTxtEmail.getText());
+        vendedor.setRgJmbv(jFmtRg.getText());
         
         
         return vendedor;
          };
          
          
-         public Vendedor beanView(Vendedor vendedor){
+         public VendedorJmbv beanView(VendedorJmbv vendedor){
         
             
-        jTxtCodigo.setText(String.valueOf(vendedor.getIdVendedor()));
-        jTxtNome.setText(vendedor.getNome());
-        jFmtCpf.setText(vendedor.getCpf());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        jFmtDataNascimento.setText(formato.format(vendedor.getDataNascimento()));//a conversao
-        jFmtCep.setText(vendedor.getCep());
-        jTxtEndereco.setText(vendedor.getNome());
-        jFmtCelular.setText(vendedor.getCelular());
+        jTxtCodigo.setText(String.valueOf(vendedor.getIdvendedorJmbv()));
+        jTxtNome.setText(vendedor.getNomeJmbv());
+        jFmtCpf.setText(vendedor.getCpfJmbv());
+        jFmtDataNascimento.setText(Util.dateStr(vendedor.getDataNascimentoJmbv()));
+        jFmtCep.setText(vendedor.getCepJmbv());
+        jTxtEndereco.setText(vendedor.getNomeJmbv());
+        jFmtCelular.setText(vendedor.getNumeroJmbv());
         //jTxtCidade.setText(vendedor.getCidade());
-        jTxtBairro.setText(vendedor.getBairro());
-        jTxtComplemento.setText(vendedor.getComplemento());
-        jTxtEmail.setText(vendedor.getEmail());
-        jFmtRg.setText(vendedor.getRg());
+        jTxtBairro.setText(vendedor.getBairroJmbv());
+        jTxtComplemento.setText(vendedor.getComplementoJmbv());
+        jTxtEmail.setText(vendedor.getEmailJmbv());
+        jFmtRg.setText(vendedor.getRgJmbv());
         
         
         return vendedor;

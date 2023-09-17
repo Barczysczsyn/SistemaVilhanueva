@@ -5,13 +5,11 @@
  */
 package dao;
 
-import aulas.TesteJDBC;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+//import hibernate.HibernateUtil;
 
 /**
  *
@@ -21,7 +19,16 @@ public abstract class DAO_Abstract {
     //void significa sem retorno
     //ele da o esqueleto pras outras classes
     
+    Session session;
     
+    public DAO_Abstract(){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        //conexao();
+    }
+    
+    
+    /*
     Connection cnt;
     
    public void conexao(){
@@ -42,9 +49,11 @@ public abstract class DAO_Abstract {
         }
     }
 
+   
     public DAO_Abstract() {
         conexao();
     }
+   */
 
     
     public abstract void insert(Object object);

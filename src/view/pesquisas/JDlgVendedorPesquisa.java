@@ -5,7 +5,7 @@
  */
 package view.pesquisas;
 
-import bean.Vendedor;
+import bean.VendedorJmbv;
 import dao.Vendedor_DAO;
 import java.util.List;
 import view.JDlgVendedor;
@@ -28,7 +28,7 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
         Vendedor_DAO vendedor_DAO = new Vendedor_DAO();
         List lista = vendedor_DAO.listAll();
         vendedorControle.setList(lista);
-        jTable1.setModel(vendedorControle);
+        jTable1_jmbv.setModel(vendedorControle);
         
         setLocationRelativeTo(null);
     }
@@ -46,13 +46,13 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jBtnOK = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
+        jTable1_jmbv = new javax.swing.JTable();
+        jBtnOK_jmbv = new javax.swing.JButton();
+        jBtnCancelar_jmbv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1_jmbv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,21 +63,21 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable1_jmbv);
 
-        jBtnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
-        jBtnOK.setText("OK");
-        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
+        jBtnOK_jmbv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnOK_jmbv.setText("OK");
+        jBtnOK_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOKActionPerformed(evt);
+                jBtnOK_jmbvActionPerformed(evt);
             }
         });
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCancelar_jmbv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jBtnCancelar_jmbv.setText("Cancelar");
+        jBtnCancelar_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
+                jBtnCancelar_jmbvActionPerformed(evt);
             }
         });
 
@@ -91,9 +91,9 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
                 .addContainerGap(373, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnOK)
+                .addComponent(jBtnOK_jmbv)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnCancelar)
+                .addComponent(jBtnCancelar_jmbv)
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -103,26 +103,26 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnOK)
-                    .addComponent(jBtnCancelar))
+                    .addComponent(jBtnOK_jmbv)
+                    .addComponent(jBtnCancelar_jmbv))
                 .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
+    private void jBtnOK_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOK_jmbvActionPerformed
         // TODO add your handling code here:
-        int rowSel = jTable1.getSelectedRow();
-        Vendedor vendedor = vendedorControle.getBean(rowSel);
+        int rowSel = jTable1_jmbv.getSelectedRow();
+        VendedorJmbv vendedor = vendedorControle.getBean(rowSel);
         jDlgVendedor.beanView(vendedor);
         setVisible(false);
-    }//GEN-LAST:event_jBtnOKActionPerformed
+    }//GEN-LAST:event_jBtnOK_jmbvActionPerformed
 
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+    private void jBtnCancelar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_jmbvActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
+    }//GEN-LAST:event_jBtnCancelar_jmbvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,9 +174,9 @@ public class JDlgVendedorPesquisa extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnOK;
+    private javax.swing.JButton jBtnCancelar_jmbv;
+    private javax.swing.JButton jBtnOK_jmbv;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1_jmbv;
     // End of variables declaration//GEN-END:variables
 }

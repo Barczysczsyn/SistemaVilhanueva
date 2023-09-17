@@ -7,7 +7,7 @@ package view;
 
 import aulas.*;
 import javax.swing.JOptionPane;
-import bean.Usuarios;
+import bean.UsuariosJmbv;
 import dao.Usuarios_DAO;
 
 /**
@@ -37,10 +37,10 @@ public class JFrmLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTxtApelido = new javax.swing.JTextField();
-        jBtnOk = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
-        jPwfSenha = new javax.swing.JPasswordField();
+        jTxtApelido_jmbv = new javax.swing.JTextField();
+        jBtnOk_jmbv = new javax.swing.JButton();
+        jBtnCancelar_jmbv = new javax.swing.JButton();
+        jPswSenha_jmbv = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,25 +48,25 @@ public class JFrmLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Apelido");
 
-        jTxtApelido.addActionListener(new java.awt.event.ActionListener() {
+        jTxtApelido_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtApelidoActionPerformed(evt);
+                jTxtApelido_jmbvActionPerformed(evt);
             }
         });
 
-        jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
-        jBtnOk.setText("OK");
-        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+        jBtnOk_jmbv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnOk_jmbv.setText("OK");
+        jBtnOk_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOkActionPerformed(evt);
+                jBtnOk_jmbvActionPerformed(evt);
             }
         });
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCancelar_jmbv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jBtnCancelar_jmbv.setText("Cancelar");
+        jBtnCancelar_jmbv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
+                jBtnCancelar_jmbvActionPerformed(evt);
             }
         });
 
@@ -80,13 +80,13 @@ public class JFrmLogin extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
-                        .addComponent(jTxtApelido, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                        .addComponent(jPwfSenha))
+                        .addComponent(jTxtApelido_jmbv, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                        .addComponent(jPswSenha_jmbv))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 71, Short.MAX_VALUE)
-                        .addComponent(jBtnOk)
+                        .addComponent(jBtnOk_jmbv)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnCancelar)))
+                        .addComponent(jBtnCancelar_jmbv)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -95,43 +95,45 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTxtApelido_jmbv, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPswSenha_jmbv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 133, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnOk))
+                            .addComponent(jBtnCancelar_jmbv, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnOk_jmbv))
                         .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTxtApelidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApelidoActionPerformed
+    private void jTxtApelido_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApelido_jmbvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtApelidoActionPerformed
+    }//GEN-LAST:event_jTxtApelido_jmbvActionPerformed
 
-    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+    private void jBtnOk_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk_jmbvActionPerformed
         // TODO add your handling code here:
 
-        Usuarios usuarios = new Usuarios();
-        String apelido = jTxtApelido.getText();
-        String senha = jPwfSenha.getText();
+        //bd
+        /*
+        UsuariosJmbv usuarios = new UsuariosJmbv();
+        String apelido = jTxtApelido_jmbv.getText();
+        String senha = jPwfSenha_jmbv.getText();
         //listApelido(jTxtApelido.getText(),jPwfSenha.getText());
         Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
-        usuarios = usuarios_DAO.listCadastro(apelido, senha);
+        //usuarios = usuarios_DAO.listCadastro(apelido, senha);
 
-        System.out.println("apelido: " + usuarios.getApelido());
-        System.out.println("senha: " + usuarios.getSenha());
+        System.out.println("apelido: " + usuarios.getApelidoJmbv());
+        System.out.println("senha: " + usuarios.getSenhaJmbv());
 
-        if (apelido.equals(usuarios.getApelido()) && senha.equals(usuarios.getSenha())) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
+        if (apelido.equals(usuarios.getApelidoJmbv()) && senha.equals(usuarios.getSenhaJmbv())) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
 
             //teste
             System.out.println("deu certo");
@@ -145,13 +147,36 @@ public class JFrmLogin extends javax.swing.JFrame {
             
               JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
         jFrmPrincipal.setVisible(true);
-             */
+             
+        
         } else {
             //teste
             System.out.println("deu errado");
             JOptionPane.showMessageDialog(null, "usuário ou senha incorretos");
             contador++;
         };
+        */
+        if (jTxtApelido_jmbv.getText().equals("joao") && jPswSenha_jmbv.getText().equals("jao123")) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
+
+            //teste
+            System.out.println("deu certo");
+
+            //if(jTxtNome.getText() == "joao" && jTxtSenha.getText() == "123456" ){// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
+            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+            jFrmPrincipal.setVisible(true);
+
+            
+        }else if (jTxtApelido_jmbv.getText().equals("Veterinaria") && jPswSenha_jmbv.getText().equals("vet1234")){
+            
+              JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+        jFrmPrincipal.setVisible(true);
+             
+        
+        } else {
+            //teste
+            System.out.println("deu errado");
+            JOptionPane.showMessageDialog(null, "usuário ou senha incorretos");
+            contador++;
         
         
             System.out.println("contador " + contador);
@@ -159,12 +184,13 @@ public class JFrmLogin extends javax.swing.JFrame {
         if (contador == 3) {
             System.exit(0);
         }
-    }//GEN-LAST:event_jBtnOkActionPerformed
+        }
+    }//GEN-LAST:event_jBtnOk_jmbvActionPerformed
 
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+    private void jBtnCancelar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_jmbvActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
+    }//GEN-LAST:event_jBtnCancelar_jmbvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,11 +231,11 @@ public class JFrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnOk;
+    private javax.swing.JButton jBtnCancelar_jmbv;
+    private javax.swing.JButton jBtnOk_jmbv;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPwfSenha;
-    private javax.swing.JTextField jTxtApelido;
+    private javax.swing.JPasswordField jPswSenha_jmbv;
+    private javax.swing.JTextField jTxtApelido_jmbv;
     // End of variables declaration//GEN-END:variables
 }

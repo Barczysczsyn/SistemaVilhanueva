@@ -5,7 +5,7 @@
  */
 package view.pesquisas;
 
-import bean.Clientes;
+import bean.ClientesJmbv;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -19,8 +19,8 @@ public class ClientesControle extends AbstractTableModel {
     public void setList(List lista){
         this.lista = lista;
     }
-    public Clientes getBean(int linha){
-        return (Clientes) lista.get(linha);
+    public ClientesJmbv getBean(int linha){
+        return (ClientesJmbv) lista.get(linha);
     }
     @Override
     public int getRowCount() {
@@ -37,19 +37,19 @@ public class ClientesControle extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. return
-        Clientes clientes = (Clientes) lista.get(rowIndex);
+        ClientesJmbv clientes = (ClientesJmbv) lista.get(rowIndex);
 
         if (columnIndex == 0) {
-            return clientes.getIdClientes();
+            return clientes.getIdclientesJmbv();
         }
         if (columnIndex == 1) {
-            return clientes.getNome();
+            return clientes.getNomeJmbv();
         }
         if (columnIndex == 2) {
-            return clientes.getSexo();
+            return clientes.getSexoJmbv();
         }
         if (columnIndex == 3) {
-            return clientes.getCpf();
+            return clientes.getCpfJmbv();
         }
 
         return "conteudo";
