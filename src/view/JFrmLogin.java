@@ -9,6 +9,7 @@ import aulas.*;
 import javax.swing.JOptionPane;
 import bean.UsuariosJmbv;
 import dao.Usuarios_DAO;
+import java.util.List;
 
 /**
  *
@@ -40,7 +41,7 @@ public class JFrmLogin extends javax.swing.JFrame {
         jTxtApelido_jmbv = new javax.swing.JTextField();
         jBtnOk_jmbv = new javax.swing.JButton();
         jBtnCancelar_jmbv = new javax.swing.JButton();
-        jPswSenha_jmbv = new javax.swing.JPasswordField();
+        jPwfSenha_jmbv = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +82,7 @@ public class JFrmLogin extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(jTxtApelido_jmbv, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                        .addComponent(jPswSenha_jmbv))
+                        .addComponent(jPwfSenha_jmbv))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 71, Short.MAX_VALUE)
                         .addComponent(jBtnOk_jmbv)
@@ -101,7 +102,7 @@ public class JFrmLogin extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jPswSenha_jmbv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPwfSenha_jmbv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 133, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -122,19 +123,23 @@ public class JFrmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //bd
-        /*
+        
         UsuariosJmbv usuarios = new UsuariosJmbv();
         String apelido = jTxtApelido_jmbv.getText();
         String senha = jPwfSenha_jmbv.getText();
         //listApelido(jTxtApelido.getText(),jPwfSenha.getText());
         Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
         //usuarios = usuarios_DAO.listCadastro(apelido, senha);
+        //List lista2 = usuarios_DAO.listCadastro(apelido, senha);
+        boolean bola = usuarios_DAO.listCadastro(apelido, senha);
 
+        System.out.println("usuarios: " + usuarios);
+        //System.out.println("lista: " + lista2);
         System.out.println("apelido: " + usuarios.getApelidoJmbv());
         System.out.println("senha: " + usuarios.getSenhaJmbv());
 
-        if (apelido.equals(usuarios.getApelidoJmbv()) && senha.equals(usuarios.getSenhaJmbv())) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
-
+        //if (apelido.equals(usuarios.getApelidoJmbv()) && senha.equals(usuarios.getSenhaJmbv())) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
+        if (bola == true) {
             //teste
             System.out.println("deu certo");
 
@@ -142,6 +147,11 @@ public class JFrmLogin extends javax.swing.JFrame {
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
             jFrmPrincipal.setVisible(true);
 
+        } else {
+            //teste
+            System.out.println("deu errado");
+            JOptionPane.showMessageDialog(null, "usuário ou senha incorretos");
+            contador++;
             /*
         else if (jTxtApelido.getText().equals("Veterinaria")  && jPswSenha.getText().equals("vet1234")){
             
@@ -155,7 +165,9 @@ public class JFrmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "usuário ou senha incorretos");
             contador++;
         };
-        */
+        
+        //fixo
+        /*
         if (jTxtApelido_jmbv.getText().equals("joao") && jPswSenha_jmbv.getText().equals("jao123")) {// em java:"=" vai receber o valor numa variavel// "==" vai comparar dois valores
 
             //teste
@@ -180,10 +192,11 @@ public class JFrmLogin extends javax.swing.JFrame {
         
         
             System.out.println("contador " + contador);
+        */
 
+        }
         if (contador == 3) {
             System.exit(0);
-        }
         }
     }//GEN-LAST:event_jBtnOk_jmbvActionPerformed
 
@@ -235,7 +248,7 @@ public class JFrmLogin extends javax.swing.JFrame {
     private javax.swing.JButton jBtnOk_jmbv;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPswSenha_jmbv;
+    private javax.swing.JPasswordField jPwfSenha_jmbv;
     private javax.swing.JTextField jTxtApelido_jmbv;
     // End of variables declaration//GEN-END:variables
 }

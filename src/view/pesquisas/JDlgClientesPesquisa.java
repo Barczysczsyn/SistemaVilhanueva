@@ -116,6 +116,7 @@ public class JDlgClientesPesquisa extends javax.swing.JDialog {
         int rowSel = jTable1_jmbv.getSelectedRow();
         ClientesJmbv clientes = clientesControle.getBean(rowSel);
         jDlgClientes.beanView(clientes);
+        jDlgClientes.pesquisado = true;
         setVisible(false);
     }//GEN-LAST:event_jBtnOK_jmbvActionPerformed
 

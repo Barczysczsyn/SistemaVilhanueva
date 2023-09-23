@@ -9,6 +9,7 @@ import bean.ProdutosJmbv;
 import dao.Produtos_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tools.Util;
@@ -222,9 +223,9 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     
     public ProdutosJmbv beanView(ProdutosJmbv produtos) {
         
-        jTxtCodigo_jmbv.setText(String.valueOf(produtos.getIdprodutosJmbv()));
+        jTxtCodigo_jmbv.setText(Util.intStr(produtos.getIdprodutosJmbv()));
         jTxtNome_jmbv.setText(produtos.getNomeJmbv());
-        jTxtPreco_jmbv.setText(String.valueOf(produtos.getPrecoJmbv()));
+        jTxtPreco_jmbv.setText(Util.doubleStr(produtos.getPrecoJmbv()));
         jTxtMarca_jmbv.setText(produtos.getMarcaJmbv());
         jFmtValidade_jmbv.setText(Util.dateStr(produtos.getValidadeJmbv()));//a conversao
         return produtos;

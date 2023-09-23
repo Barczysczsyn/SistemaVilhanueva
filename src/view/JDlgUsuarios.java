@@ -43,6 +43,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(true, jBtnIncluir_jmbv, jBtnAlterar_jmbv, jBtnExcluir_jmbv, jBtnAlterar_jmbv);
         setLocationRelativeTo(null);
         setTitle("Cadastro de Usuários");
+        
+        jBtnAlterar_jmbv.setEnabled(false);
         //fazendo a mascara por codigo
         try {
             mascaraCpf = new MaskFormatter("###.###.###-##");
@@ -365,6 +367,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(false, jTxtCodigo_jmbv, jTxtNome_jmbv, jTxtApelido_jmbv, jFmtCpf_jmbv, jFmtDataNascimento_jmbv, jPwfSenha_jmbv, jCboNivel_jmbv, jChbAtivo_jmbv, jBtnConfirmar_jmbv, jBtnCancelar_jmbv);
         Util.habilitar(true, jBtnIncluir_jmbv, jBtnAlterar_jmbv, jBtnExcluir_jmbv, jBtnAlterar_jmbv);
         Util.limparCampos(jTxtCodigo_jmbv, jTxtNome_jmbv, jTxtApelido_jmbv, jFmtCpf_jmbv, jFmtDataNascimento_jmbv, jPwfSenha_jmbv, jCboNivel_jmbv, jChbAtivo_jmbv, jBtnConfirmar_jmbv, jBtnCancelar_jmbv);
+        jBtnAlterar_jmbv.setEnabled(false);
     }//GEN-LAST:event_jBtnConfirmar_jmbvActionPerformed
 
     private void jBtnCancelar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_jmbvActionPerformed
@@ -445,11 +448,15 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         usuarios.setSenhaJmbv(jPwfSenha_jmbv.getText());
         usuarios.setNivelJmbv(Integer.valueOf(jCboNivel_jmbv.getSelectedIndex()));//e assim
         //pra inserir no chb
+        usuarios.setAtivoJmbv(jChbAtivo_jmbv.isSelected() == true ? "S" : "N");//operador ternario: faz uma pergunta, se verdadeiro é o que vem logo depois da interrogacao, senao o outro depois
+        
+        /*
         if (jChbAtivo_jmbv.isSelected() == true) {
             usuarios.setAtivoJmbv("S");
         } else {
             usuarios.setAtivoJmbv("N");
         }
+        */
 
         return usuarios;
     }
@@ -473,6 +480,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         } else {
             jChbAtivo_jmbv.setSelected(false);
         }
+        
+        jBtnAlterar_jmbv.setEnabled(true);
 
         //jChbAtivo.setSelected(usuarios.getAtivo().equals("S"));//faz direto numa linha
         return usuarios;

@@ -61,6 +61,24 @@ public class Usuarios_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
+    
+    public boolean listCadastro(String apelido, String senha){
+        //UsuariosJmbv usuariosJmbv = new UsuariosJmbv();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuariosJmbv.class);
+        criteria.add(Restrictions.eq("apelidoJmbv", apelido));
+        criteria.add(Restrictions.eq("senhaJmbv", senha));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        System.out.println("lista:" + lista);
+        if(lista.isEmpty()){
+           
+        return false; 
+        }else{
+            
+        return true; 
+        }
+    }
     public static void main(String[] args) {
         Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
     }

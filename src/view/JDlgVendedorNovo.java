@@ -6,7 +6,11 @@
 package view;
 
 
+import dao.Vendedor_DAO;
+import java.util.List;
 import tools.Util;
+import view.pesquisas.VendedorControle;
+import bean.VendedorJmbv;
 
 /**
  *
@@ -14,14 +18,25 @@ import tools.Util;
  */
 public class JDlgVendedorNovo extends javax.swing.JDialog {
 
+    Vendedor_DAO vendedor_DAO;
+    VendedorJmbv vendedor;
+    JDlgVendedorNovoIA jDlgVendedorNovoIA;
+    private VendedorControle vendedorControle;//invoca o produtos controle para controla-lo
     /**
      * Creates new form JDlgUsuariosNovo
      */
     public JDlgVendedorNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Cadastro de usuários");
+        setTitle("Cadastro de Vendedores");
         setLocationRelativeTo(null);
+        
+        jDlgVendedorNovoIA = new JDlgVendedorNovoIA(null,true);
+        vendedor_DAO = new Vendedor_DAO();
+        List lista = vendedor_DAO.listAll();
+        vendedorControle = new VendedorControle();//invoca o produtos controle para controla-lo
+        vendedorControle.setList(lista);
+        jTable2_jmbv.setModel(vendedorControle);
     }
 
     /**
@@ -41,7 +56,7 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
         jBtnAlterar_jmbv = new javax.swing.JButton();
         jBtnExcluir_jmbv = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable2_jmbv = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +117,7 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2_jmbv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -113,7 +128,7 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable2_jmbv);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,23 +152,44 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
 
     private void jBtnIncluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_jmbvActionPerformed
         // TODO add your handling code here:
-        JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
-        jDlgProdutosNovoIA.setVisible(true);
+        jDlgVendedorNovoIA.inclusao = true;
+        jDlgVendedorNovoIA.setTitle("Inclusão");
+        jDlgVendedorNovoIA.setVisible(true);
+        
+        atualizar();
     }//GEN-LAST:event_jBtnIncluir_jmbvActionPerformed
 
     private void jBtnAlterar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_jmbvActionPerformed
         // TODO add your handling code here:
-        JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
-        jDlgProdutosNovoIA.setVisible(true);
+        jDlgVendedorNovoIA.inclusao = false;
+        jDlgVendedorNovoIA.setTitle("Alteração");
+        
+        int rowSel = jTable2_jmbv.getSelectedRow();
+        vendedor = vendedorControle.getBean(rowSel);
+        jDlgVendedorNovoIA.beanView(vendedor);
+        
+        jDlgVendedorNovoIA.setVisible(true);
+        
+        atualizar();
     }//GEN-LAST:event_jBtnAlterar_jmbvActionPerformed
 
     private void jBtnExcluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_jmbvActionPerformed
         // TODO add your handling code here:
-        if(Util.perguntar("Ddeseja excluir o produto") == true){
-            
+        if(Util.perguntar("Deseja excluir o produto") == true){
+            int sel = jTable2_jmbv.getSelectedRow();
+            vendedor = vendedorControle.getBean(sel);
+            vendedor_DAO.delete(vendedor);
+        }else{
+            Util.mensagem("Exlusão cancelada.");
         }
     }//GEN-LAST:event_jBtnExcluir_jmbvActionPerformed
 
+    private void atualizar(){
+            //atualizar a tela
+            List lista = vendedor_DAO.listAll();
+            vendedorControle.setList(lista);
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -220,6 +256,6 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable2_jmbv;
     // End of variables declaration//GEN-END:variables
 }

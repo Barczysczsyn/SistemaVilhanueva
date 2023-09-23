@@ -6,6 +6,7 @@
 package view;
 
 
+import bean.ProdutosJmbv;
 import dao.Produtos_DAO;
 import java.util.List;
 import tools.Util;
@@ -26,12 +27,13 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
     public JDlgProdutosNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Cadastro de usuários");
+        setTitle("Cadastro de produtos");
         setLocationRelativeTo(null);
+        
         jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
-        produtosControle = new ProdutosControle();//invoca o produtos controle para controla-lo
         Produtos_DAO produtos_DAO = new Produtos_DAO();
         List lista = produtos_DAO.listAll();
+        produtosControle = new ProdutosControle();//invoca o produtos controle para controla-lo
         produtosControle.setList(lista);
         jTable_jmbv.setModel(produtosControle);
     }
@@ -153,6 +155,8 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
         jDlgProdutosNovoIA.setTitle("Inclusão");
         jDlgProdutosNovoIA.inclusao = true;
         jDlgProdutosNovoIA.setVisible(true);
+            //atualizar a tela
+            atualizar();
     }//GEN-LAST:event_jBtnIncluir_jmbvActionPerformed
 
     private void jBtnAlterar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_jmbvActionPerformed
@@ -160,16 +164,38 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
         //JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null,true);
         jDlgProdutosNovoIA.setTitle("Alteração");
         jDlgProdutosNovoIA.inclusao = false;
+        
+        int rowSel = jTable_jmbv.getSelectedRow();
+        ProdutosJmbv produtos = produtosControle.getBean(rowSel);
+        jDlgProdutosNovoIA.beanView(produtos);
+        
         jDlgProdutosNovoIA.setVisible(true);
+            //atualizar a tela
+            atualizar();
     }//GEN-LAST:event_jBtnAlterar_jmbvActionPerformed
 
     private void jBtnExcluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_jmbvActionPerformed
         // TODO add your handling code here:
         if(Util.perguntar("Deseja excluir o produto") == true){
-            
+            int sel = jTable_jmbv.getSelectedRow();
+            ProdutosJmbv produtos = produtosControle.getBean(sel);
+            Produtos_DAO produtos_DAO = new Produtos_DAO();
+            produtos_DAO.delete(produtos);
+            //atualizar a tela
+            atualizar();
+            //List lista = produtos_DAO.listAll();
+            //produtosControle.setList(lista);
+        }else{
+            Util.mensagem("Exlusão cancelada.");
         }
     }//GEN-LAST:event_jBtnExcluir_jmbvActionPerformed
 
+    private void atualizar(){
+            //atualizar a tela
+            Produtos_DAO produtos_DAO = new Produtos_DAO();
+            List lista = produtos_DAO.listAll();
+            produtosControle.setList(lista);
+    }
 
     /**
      * @param args the command line arguments

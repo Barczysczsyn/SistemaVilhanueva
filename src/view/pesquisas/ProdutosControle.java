@@ -19,23 +19,25 @@ public class ProdutosControle extends AbstractTableModel {
     
     public void setList(List lista){
         this.lista = lista;
-        System.out.println("setlist");
+        //System.out.println("setlist");
+        //atualizar
+        this.fireTableDataChanged();
     }
     public ProdutosJmbv getBean(int linha){
-        System.out.println("getbean");
+        //System.out.println("getbean");
         return (ProdutosJmbv) lista.get(linha);
     }
     @Override
     public int getRowCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("rowcount");
+        //System.out.println("rowcount");
         return lista.size();
     }
 
     @Override
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("columncount");
+        //System.out.println("columncount");
         return 4;
     }
 
@@ -43,7 +45,7 @@ public class ProdutosControle extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. return
         ProdutosJmbv produtos = (ProdutosJmbv) lista.get(rowIndex);
-        System.out.println("getvalueat" + rowIndex + "e" + columnIndex);
+        //System.out.println("getvalueat" + rowIndex + "e" + columnIndex);
 
         if (columnIndex == 0) {
             return produtos.getIdprodutosJmbv();

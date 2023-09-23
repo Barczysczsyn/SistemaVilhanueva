@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -24,6 +25,7 @@ import tools.Util;
 public class JDlgClientes extends javax.swing.JDialog {
     
     private boolean incluindo;
+    public boolean pesquisado;
     /**
      * Creates new form JDlgClientes
      */
@@ -35,9 +37,15 @@ public class JDlgClientes extends javax.swing.JDialog {
         jBtnCancelar_jmbv.setEnabled(false);
         setLocationRelativeTo(null);
         setTitle("Cadastro de Clientes");
+        
+        jBtnAlterar_jmbv.setEnabled(false);
     }
     
     public void habilitar() {
+        Util.habilitar(true, jTxtCodigo_jmbv, jTxtNome_jmbv, jFmtCpf_jmbv,jFmtCep_jmbv,jTxtComplemento_jmbv,jTxtCidade_jmbv,jTxtContato_jmbv,jTxtEmail_jmbv,jTxtEndereco_jmbv,jTxtEstado_jmbv,jFmtCelular_jmbv, jFmtRg_jmbv,jCboSexo_jmbv,jTxtBairro_jmbv,jFmtDataNascimento_jmbv, jBtnConfirmar_jmbv, jBtnCancelar_jmbv);
+        Util.habilitar(false, jBtnIncluir_jmbv, jBtnAlterar_jmbv, jBtnExcluir_jmbv, jBtnAlterar_jmbv);
+        
+        /*
         jTxtCodigo_jmbv.setEnabled(true);
         jTxtNome_jmbv.setEnabled(true);
         jFmtCpf_jmbv.setEnabled(true);     
@@ -63,10 +71,13 @@ public class JDlgClientes extends javax.swing.JDialog {
         jBtnAlterar_jmbv.setEnabled(false);
         jBtnExcluir_jmbv.setEnabled(false);
         jBtnPesquisa_jmbv.setEnabled(false);
+        */
     
 }
     public void desabilitar(){
-        
+        Util.habilitar(false, jTxtCodigo_jmbv, jTxtNome_jmbv, jFmtCpf_jmbv,jFmtCep_jmbv,jTxtComplemento_jmbv,jTxtCidade_jmbv,jTxtContato_jmbv,jTxtEmail_jmbv,jTxtEndereco_jmbv,jTxtEstado_jmbv,jFmtCelular_jmbv, jFmtRg_jmbv,jCboSexo_jmbv,jTxtBairro_jmbv,jFmtDataNascimento_jmbv, jBtnConfirmar_jmbv, jBtnCancelar_jmbv);
+        Util.habilitar(true, jBtnIncluir_jmbv, jBtnAlterar_jmbv, jBtnExcluir_jmbv, jBtnAlterar_jmbv);
+        /*
         jTxtCodigo_jmbv.setEnabled(false);
         jTxtNome_jmbv.setEnabled(false);
         jFmtCpf_jmbv.setEnabled(false);
@@ -91,6 +102,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         jBtnAlterar_jmbv.setEnabled(true);
         jBtnExcluir_jmbv.setEnabled(true);
         jBtnPesquisa_jmbv.setEnabled(true);
+        */
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -524,6 +536,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         }
         desabilitar();
         Util.limparCampos(jTxtCodigo_jmbv, jTxtNome_jmbv, jFmtCpf_jmbv, jFmtDataNascimento_jmbv, jFmtCep_jmbv, jTxtComplemento_jmbv, jTxtCidade_jmbv, jTxtContato_jmbv, jTxtEmail_jmbv, jTxtEndereco_jmbv, jTxtEstado_jmbv, jFmtCelular_jmbv, jFmtRg_jmbv, jCboSexo_jmbv, jTxtBairro_jmbv);//opcional
+        jBtnAlterar_jmbv.setEnabled(false);
     }//GEN-LAST:event_jBtnConfirmar_jmbvActionPerformed
 
     private void jBtnCancelar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_jmbvActionPerformed
@@ -535,10 +548,12 @@ public class JDlgClientes extends javax.swing.JDialog {
     private void jBtnExcluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_jmbvActionPerformed
         // TODO add your handling code here:
 
-        int resp = JOptionPane.showConfirmDialog(null,"Deseja excluir o registro?","Confirmar", JOptionPane.YES_NO_OPTION);//null centraliza no meio do monitor//mensagem//titulo//os botoes
+        //int resp = JOptionPane.showConfirmDialog(null,"Deseja excluir o registro?","Confirmar", JOptionPane.YES_NO_OPTION);//null centraliza no meio do monitor//mensagem//titulo//os botoes
+        if(Util.perguntar("Deseja excluir o registro") == true){
+        
         
         //if(resp == 0){//0 e o sim
-        if(resp == JOptionPane.YES_OPTION){//constante serve pra deixar  o codigo mais claro//classe usando um metodo estatico, estatico nao precisa instanciar a classe
+        //if(resp == JOptionPane.YES_OPTION){//constante serve pra deixar  o codigo mais claro//classe usando um metodo estatico, estatico nao precisa instanciar a classe
         
         ClientesJmbv clientes = viewBean();
         Clientes_DAO clientes_DAO = new Clientes_DAO();//executa o dao
@@ -546,7 +561,8 @@ public class JDlgClientes extends javax.swing.JDialog {
         
         //clientes_DAO.insert(viewBean());//pra fazer direto
         }else{
-            JOptionPane.showMessageDialog(null,"Exclusão cancelada.","Alerta",2);
+            //JOptionPane.showMessageDialog(null,"Exclusão cancelada.","Alerta",2);
+            Util.mensagem("Exclusão cancelada.");
         }
         Util.limparCampos(jTxtCodigo_jmbv, jTxtNome_jmbv, jFmtCpf_jmbv, jFmtDataNascimento_jmbv, jFmtCep_jmbv, jTxtComplemento_jmbv, jTxtCidade_jmbv, jTxtContato_jmbv, jTxtEmail_jmbv, jTxtEndereco_jmbv, jTxtEstado_jmbv, jFmtCelular_jmbv, jFmtRg_jmbv, jCboSexo_jmbv, jTxtBairro_jmbv);
     }//GEN-LAST:event_jBtnExcluir_jmbvActionPerformed
@@ -663,6 +679,8 @@ public class JDlgClientes extends javax.swing.JDialog {
         
         
         //jChbAtivo.setSelected(clientes.getAtivo().equals("S"));//faz direto numa linha
+        
+        jBtnAlterar_jmbv.setEnabled(true);
         return clientes;
         }
     

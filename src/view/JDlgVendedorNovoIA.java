@@ -5,12 +5,18 @@
  */
 package view;
 
+import bean.VendedorJmbv;
+import dao.Vendedor_DAO;
+import tools.Util;
+import view.pesquisas.VendedorControle;
+
 /**
  *
  * @author jmbvi
  */
 public class JDlgVendedorNovoIA extends javax.swing.JDialog {
 
+        boolean inclusao;
     /**
      * Creates new form JDlgUsuariosNovoIA
      */
@@ -299,10 +305,6 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTxtApelido_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApelido_jmbvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtApelido_jmbvActionPerformed
-
     private void jFmtCpf_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCpf_jmbvActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFmtCpf_jmbvActionPerformed
@@ -318,11 +320,23 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+                
+        if(inclusao){
+            Vendedor_DAO vendedor_DAO = new Vendedor_DAO();
+            vendedor_DAO.insert(viewBean());
+        }else{
+            Vendedor_DAO vendedor_DAO = new Vendedor_DAO();
+            vendedor_DAO.update(viewBean());
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        
+        //VendedorControle vendedorControle = new VendedorControle();
+        //VendedorJmbv vendedor = vendedorControle.getBean(rowSel);
+        //jDlgVendedor.beanView(vendedor);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jFmtCep_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCep_jmbvActionPerformed
@@ -337,6 +351,44 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFmtCelular_jmbvActionPerformed
 
+    private void jTxtApelido_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApelido_jmbvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtApelido_jmbvActionPerformed
+
+    public VendedorJmbv viewBean() {
+        VendedorJmbv vendedor = new VendedorJmbv();     
+        vendedor.setIdvendedorJmbv(Util.strInt(jTxtCodigo_jmbv.getText()));
+        vendedor.setNomeJmbv(jTxtNome_jmbv.getText());
+        vendedor.setCpfJmbv(jFmtCpf_jmbv.getText());
+        //data
+        vendedor.setDataNascimentoJmbv(Util.strDate(jFmtDataNascimento_jmbv.getText()));
+        vendedor.setCepJmbv(jFmtCep_jmbv.getText());
+        vendedor.setEnderecoJmbv(jTxtEndereco_jmbv.getText());
+        vendedor.setNumeroJmbv(jFmtCelular_jmbv.getText());
+        vendedor.setBairroJmbv(jTxtBairro_jmbv.getText());
+        vendedor.setComplementoJmbv(jTxtComplemento_jmbv.getText());
+        vendedor.setEmailJmbv(jTxtEmail_jmbv.getText());
+        vendedor.setRgJmbv(jFmtRg_jmbv.getText());
+
+      
+        return vendedor;
+    }
+    public VendedorJmbv beanView(VendedorJmbv vendedor) {
+        jTxtCodigo_jmbv.setText(Util.intStr(vendedor.getIdvendedorJmbv()));
+        jTxtNome_jmbv.setText(vendedor.getNomeJmbv());
+        jFmtCpf_jmbv.setText(vendedor.getCpfJmbv());
+        jFmtDataNascimento_jmbv.setText(Util.dateStr(vendedor.getDataNascimentoJmbv()));
+        jFmtCep_jmbv.setText(vendedor.getCepJmbv());
+        jTxtEndereco_jmbv.setText(vendedor.getEnderecoJmbv());
+        jFmtCelular_jmbv.setText(vendedor.getNumeroJmbv());
+        jTxtBairro_jmbv.setText(vendedor.getBairroJmbv());
+        jTxtComplemento_jmbv.setText(vendedor.getComplementoJmbv());
+        jTxtEmail_jmbv.setText(vendedor.getEmailJmbv());
+        jFmtRg_jmbv.setText(vendedor.getRgJmbv());
+
+      
+        return vendedor;
+    }
     /**
      * @param args the command line arguments
      */
