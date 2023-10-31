@@ -61,6 +61,31 @@ public class Vendas_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
+    public List listClientes(String cliente) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasJmbv.class);
+        criteria.add(Restrictions.eq("vendedorJmbv", cliente));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listVendedor(String vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasJmbv.class);
+        criteria.add(Restrictions.eq("clientesJmbv", vendedor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listClientesEVendedor(String cliente, String vendedor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasJmbv.class);
+        criteria.add(Restrictions.eq("clientesJmbv", vendedor));
+        criteria.add(Restrictions.eq("vendedormbv", cliente));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
     public static void main(String[] args) {
         Vendas_DAO vendas_DAO = new Vendas_DAO();
     }

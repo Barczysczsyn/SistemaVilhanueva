@@ -4,6 +4,7 @@ import bean.ProdutosJmbv;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /*
@@ -57,6 +58,31 @@ public class Produtos_DAO extends DAO_Abstract {
     public List listAll() {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ProdutosJmbv.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutosJmbv.class);
+        criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listMarca(String marca){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutosJmbv.class);
+        criteria.add(Restrictions.like("cpfJmbv", marca, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listNomeEMarca(String nome, String marca){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutosJmbv.class);
+        criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("cpfJmbv", marca, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

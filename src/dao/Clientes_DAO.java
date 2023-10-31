@@ -4,6 +4,7 @@ import bean.ClientesJmbv;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /*
@@ -57,6 +58,31 @@ public class Clientes_DAO extends DAO_Abstract {
     public List listAll() {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ClientesJmbv.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ClientesJmbv.class);
+        criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listCpf(String cpf){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ClientesJmbv.class);
+        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listNomeECpf(String nome,String cpf){
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ClientesJmbv.class);
+        criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

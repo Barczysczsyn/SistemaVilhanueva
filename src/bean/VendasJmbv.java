@@ -84,7 +84,7 @@ public class VendasJmbv  implements java.io.Serializable {
     }
 
     //feito
-    @Column(name="valortotal_jmbv", nullable=false, precision=10)
+    @Column(name="valor total_jmbv", nullable=false, precision=10)
     public double getValorTotalJmbv() {
         return this.valorTotalJmbv;
     }
