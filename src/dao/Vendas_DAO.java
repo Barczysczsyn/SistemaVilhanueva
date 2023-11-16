@@ -2,8 +2,10 @@ package dao;
 
 import bean.VendasJmbv;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /*
@@ -47,7 +49,11 @@ public class Vendas_DAO extends DAO_Abstract {
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasJmbv.class);
-        criteria.add(Restrictions.eq("idusuariosJmbv", id));
+        criteria.add(Restrictions.eq("idvendasJmbv", id));
+        //ne = not equals
+        //Restrictions.isNull("nome")//pega se  campo nome e vazio
+        //Restrictions.like("nome","mar%")//ve se o nome comeca com mar
+        //Restrictions.gt("preco",new Double(30.0));//ve se o campo preco e maior que 30
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -61,27 +67,29 @@ public class Vendas_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    public List listClientes(String cliente) {
+    public List listData(Date data,Date data2){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasJmbv.class);
-        criteria.add(Restrictions.eq("vendedorJmbv", cliente));
+        criteria.add(Restrictions.gt("dataJmbv", data));
+        criteria.add(Restrictions.lt("dataJmbv", data2));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listVendedor(String vendedor) {
+    public List listValorTotal(double total){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasJmbv.class);
-        criteria.add(Restrictions.eq("clientesJmbv", vendedor));
+        criteria.add(Restrictions.eq("valorTotalJmbv", total));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listClientesEVendedor(String cliente, String vendedor) {
+    public List listDataETotal( double total,Date data, Date data2){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasJmbv.class);
-        criteria.add(Restrictions.eq("clientesJmbv", vendedor));
-        criteria.add(Restrictions.eq("vendedormbv", cliente));
+        criteria.add(Restrictions.eq("valorTotalJmbv", total));
+        criteria.add(Restrictions.gt("dataJmbv", data));
+        criteria.add(Restrictions.lt("dataJmbv", data2));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

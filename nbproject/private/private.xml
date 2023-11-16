@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/pesquisas/UsuariosControle.java</file>
-            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/pesquisas/JDlgUsuariosPesquisa.java</file>
-            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/dao/Usuarios_DAO.java</file>
-            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/query/JDlgConsultaUsuarios.java</file>
-            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/bean/UsuariosJmbv.java</file>
+            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/pesquisas/JDlgVendasPesquisa.java</file>
+            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/JDlgVendas.java</file>
+            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/JFrmPrincipal.java</file>
+            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/JDlgVendasProduto.java</file>
+            <file>file:/C:/Users/jmbvi/Documents/netebeans/SistemaVilhanueva3/src/view/pesquisas/VendasControle.java</file>
         </group>
     </open-files>
 </project-private>

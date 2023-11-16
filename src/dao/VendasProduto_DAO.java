@@ -61,6 +61,14 @@ public class VendasProduto_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
+    public List listRel() {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasProdutoJmbv.class);
+        //criteria.add(Restrictions.eq("idvendasProdutoJmbv", id));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
     public static void main(String[] args) {
         VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
     }

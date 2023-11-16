@@ -43,7 +43,7 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         jTxtNome = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTxtCpf = new javax.swing.JTextField();
+        jCboSexo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -66,13 +66,9 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Cpf");
+        jLabel2.setText("Sexo");
 
-        jTxtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtCpfActionPerformed(evt);
-            }
-        });
+        jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,8 +85,8 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(243, Short.MAX_VALUE))
+                            .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,11 +96,12 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(2, 2, 2)
-                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(2, 2, 2)
-                        .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(24, 24, 24)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnConsultar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -150,20 +147,20 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         Clientes_DAO clientes = new Clientes_DAO();
         clientesControle = new ClientesControle();
         
-        if(jTxtNome.getText().equals("") && jTxtCpf.getText().equals("")){
+        if(jTxtNome.getText().equals("") && jCboSexo.getSelectedIndex() == -1){
         List lista = clientes.listAll();
         clientesControle.setList(lista);
         }else{
-            if(!jTxtNome.getText().equals("") && !jTxtCpf.getText().equals("")){
-                    List lista = clientes.listNomeECpf(jTxtNome.getText(),jTxtCpf.getText());
+            if(!jTxtNome.getText().equals("") && jCboSexo.getSelectedIndex() != -1 ){
+                    List lista = clientes.listNomeESexo(jTxtNome.getText(),jCboSexo.getSelectedIndex());
                     clientesControle.setList(lista);
             } else{
                 if(!jTxtNome.getText().equals("")){
                     List lista = clientes.listNome(jTxtNome.getText());
                     clientesControle.setList(lista);
                 }
-                if(!jTxtCpf.getText().equals("")){
-                    List lista = clientes.listCpf(jTxtCpf.getText());
+                if(jCboSexo.getSelectedIndex() != -1){
+                    List lista = clientes.listSexo(jCboSexo.getSelectedIndex());
                     clientesControle.setList(lista);
                 }
             }
@@ -172,10 +169,6 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         
         jTable1.setModel(clientesControle);
     }//GEN-LAST:event_jBtnConsultarActionPerformed
-
-    private void jTxtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtCpfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,12 +215,12 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsultar;
+    private javax.swing.JComboBox<String> jCboSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTxtCpf;
     private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
 }

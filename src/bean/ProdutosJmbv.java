@@ -1,12 +1,14 @@
 package bean;
-// Generated 12/09/2023 08:36:38 by Hibernate Tools 4.3.1
+// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,9 +40,7 @@ public class ProdutosJmbv  implements java.io.Serializable {
         this.marcaJmbv = marcaJmbv;
         this.validadeJmbv = validadeJmbv;
     }
-    
-    
-    
+   
      @Id 
 
     
@@ -93,6 +93,10 @@ public class ProdutosJmbv  implements java.io.Serializable {
         this.validadeJmbv = validadeJmbv;
     }
 
+@Override
+public String toString() {
+return this.nomeJmbv;
+}
 
 }
 

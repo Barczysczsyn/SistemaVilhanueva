@@ -7,6 +7,7 @@ package query;
 
 import dao.Produtos_DAO;
 import java.util.List;
+import tools.Util;
 import view.pesquisas.ProdutosControle;
 
 /**
@@ -43,7 +44,9 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         jTxtNome = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTxtMarca = new javax.swing.JTextField();
+        jTxtPreco = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTxtPrecoM = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -66,11 +69,19 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Marca");
+        jLabel2.setText("Preço menor");
 
-        jTxtMarca.addActionListener(new java.awt.event.ActionListener() {
+        jTxtPreco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtMarcaActionPerformed(evt);
+                jTxtPrecoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Preço maior");
+
+        jTxtPrecoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtPrecoMActionPerformed(evt);
             }
         });
 
@@ -89,8 +100,12 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(243, Short.MAX_VALUE))
+                            .addComponent(jTxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTxtPrecoM, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,12 +115,15 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(2, 2, 2)
-                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTxtPrecoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(2, 2, 2)
-                        .addComponent(jTxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(24, 24, 24)))
                 .addComponent(jBtnConsultar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -135,7 +153,7 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,20 +168,20 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         Produtos_DAO produtos = new Produtos_DAO();
         produtosControle = new ProdutosControle();
         
-        if(jTxtNome.getText().equals("") && jTxtMarca.getText().equals("")){
+        if(jTxtNome.getText().equals("") && jTxtPreco.getText().equals("") && jTxtPrecoM.getText().equals("")){
         List lista = produtos.listAll();
         produtosControle.setList(lista);
         }else{
-            if(!jTxtNome.getText().equals("") && !jTxtMarca.getText().equals("")){
-                    List lista = produtos.listNomeEMarca(jTxtNome.getText(),jTxtMarca.getText());
+            if(!jTxtNome.getText().equals("") && !jTxtPreco.getText().equals("") && !jTxtPrecoM.getText().equals("")){
+                    List lista = produtos.listNomeEPreco(jTxtNome.getText(),Util.strDouble(jTxtPreco.getText()),Util.strDouble(jTxtPrecoM.getText()));
                     produtosControle.setList(lista);
             } else{
                 if(!jTxtNome.getText().equals("")){
                     List lista = produtos.listNome(jTxtNome.getText());
                     produtosControle.setList(lista);
                 }
-                if(!jTxtMarca.getText().equals("")){
-                    List lista = produtos.listMarca(jTxtMarca.getText());
+                if(!jTxtPreco.getText().equals("")){
+                    List lista = produtos.listPreco(Util.strDouble(jTxtPreco.getText()),Util.strDouble(jTxtPrecoM.getText()));
                     produtosControle.setList(lista);
                 }
             }
@@ -173,9 +191,13 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         jTable1.setModel(produtosControle);
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
-    private void jTxtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtMarcaActionPerformed
+    private void jTxtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPrecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtMarcaActionPerformed
+    }//GEN-LAST:event_jTxtPrecoActionPerformed
+
+    private void jTxtPrecoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtPrecoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtPrecoMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,10 +252,12 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTxtMarca;
     private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtPreco;
+    private javax.swing.JTextField jTxtPrecoM;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,7 @@
  */
 package view.pesquisas;
 
-import bean.VendasJmbv;
+import bean.VendasProdutoJmbv;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,14 +13,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author jmbvi
  */
-public class VendasControle extends AbstractTableModel {
+public class VendasProdutoControle extends AbstractTableModel {
     List lista;
     
     public void setList(List lista){
         this.lista = lista;
     }
-    public VendasJmbv getBean(int linha){
-        return (VendasJmbv) lista.get(linha);
+    public VendasProdutoJmbv getBean(int linha){
+        return (VendasProdutoJmbv) lista.get(linha);
     }
     @Override
     public int getRowCount() {
@@ -37,22 +37,22 @@ public class VendasControle extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. return
-        VendasJmbv vendas = (VendasJmbv) lista.get(rowIndex);
+        VendasProdutoJmbv vendasproduto = (VendasProdutoJmbv) lista.get(rowIndex);
 
         if (columnIndex == 0) {
-            return vendas.getIdvendasJmbv();
+            return vendasproduto.getIdvendasProdutoJmbv();
         }
         if (columnIndex == 1) {
-            return vendas.getDataJmbv();
+            return vendasproduto.getVendasJmbv();
         }
         if (columnIndex == 2) {
-            return vendas.getClienteJmbv();
+            return vendasproduto.getProdutosJmbv();
         }
         if (columnIndex == 3) {
-            return vendas.getVendedorJmbv();
+            return vendasproduto.getValorUnitarioJmbv();
         }
         if (columnIndex == 4) {
-            return vendas.getValorTotalJmbv();
+            return vendasproduto.getQuantidadeJmbv();
         }
 
         return "conteudo";
@@ -65,16 +65,16 @@ public class VendasControle extends AbstractTableModel {
             return "Id";
         }
         if (column == 1) {
-            return "Data";
+            return "Venda";
         }
         if (column == 2) {
-            return "Cliente";
+            return "Produto";
         }
         if (column == 3) {
-            return "Vendedor";
+            return "Valor Unitário";
         }
         if (column == 4) {
-            return "Valor Total";
+            return "Quantidade";
         }
         return "";
     }

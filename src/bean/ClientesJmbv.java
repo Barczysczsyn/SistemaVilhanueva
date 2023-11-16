@@ -1,11 +1,10 @@
 package bean;
-// Generated 12/09/2023 08:36:38 by Hibernate Tools 4.3.1
+// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -57,6 +56,24 @@ public class ClientesJmbv  implements java.io.Serializable {
         this.emailJmbv = emailJmbv;
         this.rgJmbv = rgJmbv;
     }
+    public ClientesJmbv(int idclientesJmbv, String nomeJmbv, String sexoJmbv, Date dataNascimentoJmbv, String contatoJmbv, String cpfJmbv, String cepJmbv, String enderecoJmbv, String numeroJmbv, String cidadeJmbv, String bairroJmbv, String complementoJmbv, String estadoJmbv, String emailJmbv, String rgJmbv) {
+       this.idclientesJmbv = idclientesJmbv;
+       this.nomeJmbv = nomeJmbv;
+       this.sexoJmbv = sexoJmbv;
+       this.dataNascimentoJmbv = dataNascimentoJmbv;
+       this.contatoJmbv = contatoJmbv;
+       this.cpfJmbv = cpfJmbv;
+       this.cepJmbv = cepJmbv;
+       this.enderecoJmbv = enderecoJmbv;
+       this.numeroJmbv = numeroJmbv;
+       this.cidadeJmbv = cidadeJmbv;
+       this.bairroJmbv = bairroJmbv;
+       this.complementoJmbv = complementoJmbv;
+       this.estadoJmbv = estadoJmbv;
+       this.emailJmbv = emailJmbv;
+       this.rgJmbv = rgJmbv;
+    }
+   
      @Id 
 
     
@@ -209,6 +226,11 @@ public class ClientesJmbv  implements java.io.Serializable {
         this.rgJmbv = rgJmbv;
     }
 
+
+@Override
+public String toString() {
+return this.nomeJmbv;
+}
 
 
 

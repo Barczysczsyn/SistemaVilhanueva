@@ -90,19 +90,19 @@ public class Usuarios_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    public List listCpf(String cpf){
+    public List listNivel(int nivel){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(UsuariosJmbv.class);
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.eq("nivelJmbv", nivel));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listNomeECpf(String nome, String cpf){
+    public List listNomeENivel(String nome, int nivel){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(UsuariosJmbv.class);
         criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.eq("nivelJmbv", nivel));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

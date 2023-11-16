@@ -1,11 +1,10 @@
 package bean;
-// Generated 12/09/2023 08:36:38 by Hibernate Tools 4.3.1
+// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -36,6 +35,19 @@ public class VendedorJmbv  implements java.io.Serializable {
     public VendedorJmbv() {
     }
 
+	
+    public VendedorJmbv(int idvendedorJmbv, String nomeJmbv, String cpfJmbv, Date dataNascimentoJmbv, String cepJmbv, String enderecoJmbv, String numeroJmbv, String bairroJmbv, String emailJmbv, String rgJmbv) {
+        this.idvendedorJmbv = idvendedorJmbv;
+        this.nomeJmbv = nomeJmbv;
+        this.cpfJmbv = cpfJmbv;
+        this.dataNascimentoJmbv = dataNascimentoJmbv;
+        this.cepJmbv = cepJmbv;
+        this.enderecoJmbv = enderecoJmbv;
+        this.numeroJmbv = numeroJmbv;
+        this.bairroJmbv = bairroJmbv;
+        this.emailJmbv = emailJmbv;
+        this.rgJmbv = rgJmbv;
+    }
     public VendedorJmbv(int idvendedorJmbv, String nomeJmbv, String cpfJmbv, Date dataNascimentoJmbv, String cepJmbv, String enderecoJmbv, String numeroJmbv, String bairroJmbv, String complementoJmbv, String emailJmbv, String rgJmbv) {
        this.idvendedorJmbv = idvendedorJmbv;
        this.nomeJmbv = nomeJmbv;
@@ -73,7 +85,7 @@ public class VendedorJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_jmbv", nullable=false, length=11)
+    @Column(name="cpf_jmbv", nullable=false, length=14)
     public String getCpfJmbv() {
         return this.cpfJmbv;
     }
@@ -113,7 +125,7 @@ public class VendedorJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="numero_jmbv", nullable=false, length=10)
+    @Column(name="numero_jmbv", nullable=false, length=13)
     public String getNumeroJmbv() {
         return this.numeroJmbv;
     }
@@ -133,7 +145,7 @@ public class VendedorJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="complemento_jmbv", length=20)
+    @Column(name="complemento_jmbv", length=40)
     public String getComplementoJmbv() {
         return this.complementoJmbv;
     }
@@ -161,6 +173,14 @@ public class VendedorJmbv  implements java.io.Serializable {
     public void setRgJmbv(String rgJmbv) {
         this.rgJmbv = rgJmbv;
     }
+
+
+
+@Override
+public String toString() {
+return this.nomeJmbv;
+}
+
 
 }
 

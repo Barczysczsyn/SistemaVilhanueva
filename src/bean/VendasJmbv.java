@@ -1,14 +1,14 @@
 package bean;
-// Generated 12/09/2023 08:36:38 by Hibernate Tools 4.3.1
+// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,23 +24,22 @@ public class VendasJmbv  implements java.io.Serializable {
 
 
      private int idvendasJmbv;
-     private ClientesJmbv clientesJmbv;
-     private VendedorJmbv vendedorJmbv;
      private Date dataJmbv;
+     private int clienteJmbv;
+     private int vendedorJmbv;
      private double valorTotalJmbv;
 
     public VendasJmbv() {
     }
 
 	
-    public VendasJmbv(int idvendasJmbv, ClientesJmbv clientesJmbv, VendedorJmbv vendedorJmbv, Date dataJmbv, double valorTotalJmbv) {
+    public VendasJmbv(int idvendasJmbv, Date dataJmbv, int clienteJmbv, int vendedorJmbv, double valorTotalJmbv) {
         this.idvendasJmbv = idvendasJmbv;
-        this.clientesJmbv = clientesJmbv;
-        this.vendedorJmbv = vendedorJmbv;
         this.dataJmbv = dataJmbv;
+        this.clienteJmbv = clienteJmbv;
+        this.vendedorJmbv = vendedorJmbv;
         this.valorTotalJmbv = valorTotalJmbv;
     }
-   
      @Id 
 
     
@@ -53,26 +52,6 @@ public class VendasJmbv  implements java.io.Serializable {
         this.idvendasJmbv = idvendasJmbv;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="cliente_jmbv", nullable=false)
-    public ClientesJmbv getClientesJmbv() {
-        return this.clientesJmbv;
-    }
-    
-    public void setClientesJmbv(ClientesJmbv clientesJmbv) {
-        this.clientesJmbv = clientesJmbv;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="vendedor_jmbv", nullable=false)
-    public VendedorJmbv getVendedorJmbv() {
-        return this.vendedorJmbv;
-    }
-    
-    public void setVendedorJmbv(VendedorJmbv vendedorJmbv) {
-        this.vendedorJmbv = vendedorJmbv;
-    }
-
     @Temporal(TemporalType.DATE)
     @Column(name="data_jmbv", nullable=false, length=10)
     public Date getDataJmbv() {
@@ -83,8 +62,28 @@ public class VendasJmbv  implements java.io.Serializable {
         this.dataJmbv = dataJmbv;
     }
 
-    //feito
-    @Column(name="valor total_jmbv", nullable=false, precision=10)
+    
+    @Column(name="cliente_jmbv", nullable=false)
+    public int getClienteJmbv() {
+        return this.clienteJmbv;
+    }
+    
+    public void setClienteJmbv(int clienteJmbv) {
+        this.clienteJmbv = clienteJmbv;
+    }
+
+    
+    @Column(name="vendedor_jmbv", nullable=false)
+    public int getVendedorJmbv() {
+        return this.vendedorJmbv;
+    }
+    
+    public void setVendedorJmbv(int vendedorJmbv) {
+        this.vendedorJmbv = vendedorJmbv;
+    }
+
+    
+    @Column(name="valor_total_jmbv", nullable=false, precision=10)
     public double getValorTotalJmbv() {
         return this.valorTotalJmbv;
     }
@@ -92,7 +91,7 @@ public class VendasJmbv  implements java.io.Serializable {
     public void setValorTotalJmbv(double valorTotalJmbv) {
         this.valorTotalJmbv = valorTotalJmbv;
     }
-    
+
 
 
 

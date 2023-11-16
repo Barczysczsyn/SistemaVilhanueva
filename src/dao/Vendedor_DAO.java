@@ -2,6 +2,7 @@ package dao;
 
 import bean.VendedorJmbv;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
@@ -70,19 +71,20 @@ public class Vendedor_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    public List listCpf(String cpf){
+    public List listData(Date data, Date dataM){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendedorJmbv.class);
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("dataNascimentoJmbv", data));
+        criteria.add(Restrictions.lt("dataNascimentoJmbv", dataM));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listNomeECpf(String nome, String cpf){
+    public List listNomeEData(String nome, Date data, Date dataM){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendedorJmbv.class);
-        criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("dataNascimentoJmbv", data));
+        criteria.add(Restrictions.lt("dataNascimentoJmbv", dataM));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

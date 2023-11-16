@@ -70,19 +70,31 @@ public class Clientes_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    public List listCpf(String cpf){
+    public List listSexo(int sexo){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ClientesJmbv.class);
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        String sexoS;
+        if(sexo == 0){
+            sexoS = "M";
+        }else{
+            sexoS = "F";
+        }
+        criteria.add(Restrictions.like("sexoJmbv", sexoS));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listNomeECpf(String nome,String cpf){
+    public List listNomeESexo(String nome,int sexo){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ClientesJmbv.class);
         criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
-        criteria.add(Restrictions.like("cpfJmbv", cpf, MatchMode.ANYWHERE));
+        String sexoS;
+        if(sexo == 0){
+            sexoS = "M";
+        }else{
+            sexoS = "F";
+        }
+        criteria.add(Restrictions.eq("sexoJmbv", sexoS));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

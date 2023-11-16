@@ -70,19 +70,21 @@ public class Produtos_DAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-    public List listMarca(String marca){
+    public List listPreco(double preco, double precoM){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ProdutosJmbv.class);
-        criteria.add(Restrictions.like("cpfJmbv", marca, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("precoJmbv", preco));
+        criteria.add(Restrictions.lt("precoJmbv", precoM));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public List listNomeEMarca(String nome, String marca){
+    public List listNomeEPreco(String nome, double preco,double precoM){
         session.beginTransaction();
         Criteria criteria = session.createCriteria(ProdutosJmbv.class);
         criteria.add(Restrictions.like("nomeJmbv", nome, MatchMode.ANYWHERE));
-        criteria.add(Restrictions.like("cpfJmbv", marca, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.gt("precoJmbv", preco));
+        criteria.add(Restrictions.lt("precoJmbv", precoM));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

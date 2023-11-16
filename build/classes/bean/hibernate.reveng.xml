@@ -42,9 +42,9 @@ Contributor(s):
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db_joao_vilhanueva"/>
   <table-filter match-name="vendedor_jmbv"/>
-  <table-filter match-name="usuarios_jmbv"/>
-  <table-filter match-name="clientes_jmbv"/>
   <table-filter match-name="vendas_produto_jmbv"/>
+  <table-filter match-name="clientes_jmbv"/>
   <table-filter match-name="vendas_jmbv"/>
+  <table-filter match-name="usuarios_jmbv"/>
   <table-filter match-name="produtos_jmbv"/>
 </hibernate-reverse-engineering>

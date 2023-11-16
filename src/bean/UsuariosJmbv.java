@@ -1,5 +1,5 @@
 package bean;
-// Generated 12/09/2023 08:36:38 by Hibernate Tools 4.3.1
+// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -135,6 +135,10 @@ public class UsuariosJmbv  implements java.io.Serializable {
         this.ativoJmbv = ativoJmbv;
     }
 
+@Override
+public String toString() {
+return this.nomeJmbv;
+}
 
 
 
