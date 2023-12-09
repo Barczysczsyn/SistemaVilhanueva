@@ -40,6 +40,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnuPrincipal_jmbv = new javax.swing.JMenu();
@@ -51,7 +52,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuSair_jmbv = new javax.swing.JMenuItem();
         jMnuMovimento = new javax.swing.JMenu();
         jMnuVendas_jmbv = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMnuConsultas = new javax.swing.JMenu();
         jMnuUsuarios = new javax.swing.JMenuItem();
         jMenuClientes = new javax.swing.JMenuItem();
@@ -86,6 +86,17 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendas.png"))); // NOI18N
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
         jButton3.setFocusable(false);
@@ -177,17 +188,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMnuMovimento.add(jMnuVendas_jmbv);
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
-        jMenuItem1.setText("VendasProduto");
-        jMenuItem1.setToolTipText("");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMnuMovimento.add(jMenuItem1);
 
         jMenuBar1.add(jMnuMovimento);
 
@@ -313,10 +313,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMnuVendas_jmbvActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMnuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuConsultasActionPerformed
@@ -370,6 +366,12 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         //System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        JDlgVendas jDlgVendas = new JDlgVendas(null, true);
+        jDlgVendas.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -409,10 +411,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLblTitulo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuClientes;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuProduto;
     private javax.swing.JMenuItem jMenuVendas;
     private javax.swing.JMenuItem jMenuVendedor;

@@ -46,7 +46,8 @@ public class VendasControle extends AbstractTableModel {
             return vendas.getDataJmbv();
         }
         if (columnIndex == 2) {
-            return vendas.getClienteJmbv();
+            //return vendas.getClienteJmbv();
+            return vendas.getClientesJmbv();
         }
         if (columnIndex == 3) {
             return vendas.getVendedorJmbv();

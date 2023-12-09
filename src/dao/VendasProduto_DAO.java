@@ -1,5 +1,6 @@
 package dao;
 
+import bean.VendasJmbv;
 import bean.VendasProdutoJmbv;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class VendasProduto_DAO extends DAO_Abstract {
         session.clear();
         session.delete(object);
         session.getTransaction().commit();
+        //session.close();
     }
 
     @Override
@@ -65,6 +67,14 @@ public class VendasProduto_DAO extends DAO_Abstract {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasProdutoJmbv.class);
         //criteria.add(Restrictions.eq("idvendasProdutoJmbv", id));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listProdutos(VendasJmbv vendas) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasProdutoJmbv.class);
+        criteria.add(Restrictions.eq("vendasJmbv", vendas));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

@@ -7,10 +7,12 @@ package view;
 
 import aulas.*;
 import bean.ProdutosJmbv;
+import bean.VendasJmbv;
 import java.awt.Color;
 import dao.VendasProduto_DAO;
 import bean.VendasProdutoJmbv;
 import dao.Produtos_DAO;
+import dao.Vendas_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tools.Util;
+import view.pesquisas.VendasProdutoControle;
 
 /**
  *
@@ -26,6 +29,7 @@ import tools.Util;
 public class JDlgVendasProduto extends javax.swing.JDialog {
 
     private boolean incluindo;
+    private JDlgVendas jDlgVendas;
 
     /**
      * Creates new form JDlgUsuarios
@@ -38,16 +42,19 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         //jBtnCancelar.setEnabled(false);
         setLocationRelativeTo(null);
         //setTitle("Incluir Produto");
-        
+
         jTxtValorTotal.setEnabled(false);
-        
-        
+
         //produtos
         Produtos_DAO produtos_DAO = new Produtos_DAO();
         List listaProdutos = produtos_DAO.listAll();
-        for(int i = 0; i < listaProdutos.size(); i++){
+        for (int i = 0; i < listaProdutos.size(); i++) {
             jCboProduto.addItem((ProdutosJmbv) listaProdutos.get(i));
         }
+    }
+
+    public void setTelaPai(JDlgVendas jDlgVendas) {
+        this.jDlgVendas = jDlgVendas;//atributo da classe/ parametro que vc esta passando
     }
 
     public void habilitar() {
@@ -58,7 +65,6 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 
         jBtnOK.setEnabled(true);
         jBtnCancelar.setEnabled(true);
-
 
     }
 
@@ -84,8 +90,6 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 
         jBtnOK = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
-        jCboProduto = new javax.swing.JComboBox<ProdutosJmbv
-        >();
         jLblCliente = new javax.swing.JLabel();
         jTxtUnitario = new javax.swing.JTextField();
         jData1 = new javax.swing.JLabel();
@@ -93,6 +97,7 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         jData2 = new javax.swing.JLabel();
         jData3 = new javax.swing.JLabel();
         jTxtQuantidade = new javax.swing.JTextField();
+        jCboProduto = new javax.swing.JComboBox<ProdutosJmbv>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,30 +117,11 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
             }
         });
 
-        jCboProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCboProdutoActionPerformed(evt);
-            }
-        });
-
         jLblCliente.setText("Produto");
 
-        jTxtUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTxtUnitarioFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTxtUnitarioFocusLost(evt);
-            }
-        });
-        jTxtUnitario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtUnitarioActionPerformed(evt);
-            }
-        });
-        jTxtUnitario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTxtUnitarioPropertyChange(evt);
+        jTxtUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtUnitarioKeyReleased(evt);
             }
         });
 
@@ -145,9 +131,20 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
 
         jData3.setText("Quantidade");
 
-        jTxtQuantidade.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTxtQuantidadePropertyChange(evt);
+        jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtQuantidadeKeyReleased(evt);
+            }
+        });
+
+        jCboProduto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCboProdutoItemStateChanged(evt);
+            }
+        });
+        jCboProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCboProdutoKeyPressed(evt);
             }
         });
 
@@ -160,9 +157,9 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLblCliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLblCliente)
+                            .addComponent(jCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jData1)))
@@ -185,10 +182,10 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLblCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jData1)
@@ -226,7 +223,34 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         } else {
             vendasProduto_DAO.update(vendasProduto);
         }
-        */
+         */
+        Vendas_DAO vendas_DAO = new Vendas_DAO();
+
+        VendasProdutoJmbv vendasProduto = ViewBean();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+//VendasProdutoControle vendprodcon = new VendasProdutoControle();
+//codigo suspeito do claudio
+/*
+    vendas_DAO.insert(vendasProduto);
+    Util.mensagem("Registro incluido");
+    List lista = vendas_DAO.listAll();
+    jDlgVendas.vendasProdutoControle.setList(lista);
+             */
+
+            jDlgVendas.vendasProdutoControle.addBean(vendasProduto);
+
+        } else {
+//VendasProdutoControle vendprodcon = new VendasProdutoControle();
+
+//codigo suspeito do claudio
+/*
+    vendas_DAO.update(vendasProduto);
+    Util.mensagem("Registro incluido");
+    List lista = vendas_DAO.listAll();
+    jDlgVendas.vendasProdutoControle.setList(lista);
+             */
+            jDlgVendas.vendasProdutoControle.updateBean(jDlgVendas.getSelectedRowProd(), vendasProduto);
+        }
         desabilitar();
         limparCampos();
         setVisible(false);
@@ -239,56 +263,71 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
-    private void jCboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCboProdutoActionPerformed
-
-    private void jTxtUnitarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTxtUnitarioPropertyChange
+    private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
         // TODO add your handling code here:
         altTotal();
-        System.out.println("mudou");
-    }//GEN-LAST:event_jTxtUnitarioPropertyChange
+    }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
-    private void jTxtUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtUnitarioActionPerformed
+    private void jTxtUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtUnitarioKeyReleased
         // TODO add your handling code here:
         altTotal();
-    }//GEN-LAST:event_jTxtUnitarioActionPerformed
+    }//GEN-LAST:event_jTxtUnitarioKeyReleased
 
-    private void jTxtUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtUnitarioFocusLost
+    private void jCboProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCboProdutoKeyPressed
         // TODO add your handling code here:
-        altTotal();
-    }//GEN-LAST:event_jTxtUnitarioFocusLost
+    }//GEN-LAST:event_jCboProdutoKeyPressed
 
-    private void jTxtUnitarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtUnitarioFocusGained
+    private void jCboProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCboProdutoItemStateChanged
         // TODO add your handling code here:
-        altTotal();
-        System.out.println("fez");
-    }//GEN-LAST:event_jTxtUnitarioFocusGained
-
-    private void jTxtQuantidadePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTxtQuantidadePropertyChange
-        // TODO add your handling code here:
-        altTotal();
-        System.out.println("mudou");
-    }//GEN-LAST:event_jTxtQuantidadePropertyChange
+        ProdutosJmbv prod = (ProdutosJmbv) jCboProduto.getSelectedItem();
+        jTxtUnitario.setText(Util.doubleStr(prod.getPrecoJmbv()));
+    }//GEN-LAST:event_jCboProdutoItemStateChanged
 
     public void limparCampos() {
         //apagar?
         jTxtValorTotal.setText("");
+        //ProdutosJmbv prod = (ProdutosJmbv) jCboProduto.getSelectedItem();
+        //jTxtUnitario.setText(Util.doubleStr(prod.getPrecoJmbv()));
+    }
+
+    public VendasProdutoJmbv ViewBean() {
+        VendasProdutoJmbv vendasProd = new VendasProdutoJmbv();
+        //vendasProd.setIdvendasProdutoJmbv();
+        ProdutosJmbv prod = (ProdutosJmbv) jCboProduto.getSelectedItem();
+        vendasProd.setProdutosJmbv(prod);
+        Vendas_DAO vendas_DAO = new Vendas_DAO();
+        // ve se tem um jeito mais facil de fazer isso
+        //VendasJmbv vendas2 = (VendasJmbv) vendas_DAO.list(jDlgVendas.getId());
+        //vendasProd.setVendasJmbv(vendas2);
+        vendasProd.setValorUnitarioJmbv(Util.strDouble(jTxtUnitario.getText()));
+        vendasProd.setQuantidadeJmbv(Util.strInt(jTxtQuantidade.getText()));
+
+        return vendasProd;
+    }
+
+    ;
+    public VendasProdutoJmbv BeanView(VendasProdutoJmbv vendasProd) {
+        //vendasProd.setIdvendasProdutoJmbv();
+        ProdutosJmbv produtos = new ProdutosJmbv();
+        jCboProduto.setSelectedIndex(produtos.getIdprodutosJmbv());
+        jTxtUnitario.setText(Util.doubleStr(vendasProd.getValorUnitarioJmbv()));
+        jTxtQuantidade.setText(Util.intStr(vendasProd.getQuantidadeJmbv()));
+
+        return vendasProd;
     }
 
     ;
     
-    public void altTotal(){
-        if(!jTxtUnitario.getText().equals("") && !jTxtQuantidade.getText().equals("")){
-        double unit = Util.strDouble(jTxtUnitario.getText());
-        int quant = Util.strInt(jTxtQuantidade.getText());
-        double total = quant * unit;
-        jTxtValorTotal.setText(Util.doubleStr(total));
-        //jTxtValorTotal.setText(Util.doubleStr(Util.strInt(jTxtQuantidade.getText()) * Util.strDouble(jTxtUnitario.getText())));
+    public void altTotal() {
+        if (!jTxtUnitario.getText().equals("") && !jTxtQuantidade.getText().equals("")) {
+            double unit = Util.strDouble(jTxtUnitario.getText());
+            int quant = Util.strInt(jTxtQuantidade.getText());
+            double total = quant * unit;
+            jTxtValorTotal.setText(Util.doubleStr(total));
+            //jTxtValorTotal.setText(Util.doubleStr(Util.strInt(jTxtQuantidade.getText()) * Util.strDouble(jTxtUnitario.getText())));
         }
     }
-        
-    
+
     /**
      * @param args the command line arguments
      */

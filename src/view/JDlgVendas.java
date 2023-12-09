@@ -11,6 +11,7 @@ import bean.ClientesJmbv;
 import java.awt.Color;
 import dao.Vendas_DAO;
 import bean.VendasJmbv;
+import bean.VendasProdutoJmbv;
 import bean.VendedorJmbv;
 import dao.Clientes_DAO;
 import dao.Produtos_DAO;
@@ -18,12 +19,14 @@ import dao.VendasProduto_DAO;
 import dao.Vendedor_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tools.Util;
 import view.pesquisas.ProdutosControle;
+//import view.pesquisas.VendasControle;
 import view.pesquisas.VendasProdutoControle;
 
 /**
@@ -34,6 +37,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private boolean incluindo;
     //private JDlgVendasJmbvProduto jDlgVendasJmbvProduto;
+    public VendasProdutoControle vendasProdutoControle = new VendasProdutoControle();
 
     /**
      * Creates new form JDlgVendasJmbv
@@ -61,15 +65,12 @@ public class JDlgVendas extends javax.swing.JDialog {
         for(int i = 0; i < listaVendedor.size(); i++){
             jCboVendedor.addItem((VendedorJmbv) listaVendedor.get(i));
         }
-        
-        
-        
         VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
-        List lista = vendasProduto_DAO.listAll();
-        VendasProdutoControle vendasprodutosControle = new VendasProdutoControle();
+        //List lista = vendasProduto_DAO.listAll();
+        //VendasProdutoControle vendasprodutosControle = new VendasProdutoControle();
         //vendasprodutosControle = new VendasProdutoControle();//invoca o produtos controle para controla-lo
-        vendasprodutosControle.setList(lista);
-        jTable2.setModel(vendasprodutosControle);
+        vendasProdutoControle.setList(new ArrayList());
+        jTable2.setModel(vendasProdutoControle);
         
     }
 
@@ -107,6 +108,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         jBtnAlterar.setEnabled(true);
         jBtnExcluir.setEnabled(true);
         jBtnPesquisa.setEnabled(true);
+        vendasProdutoControle.setList(new ArrayList());
+        jTable2.setModel(vendasProdutoControle);
         
         jBtnIncluirProd.setEnabled(false);
         jBtnAlterarProd.setEnabled(false);
@@ -147,6 +150,12 @@ public class JDlgVendas extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jNumVenda.setText("Número da venda:");
+
+        jTxtNumPeido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtNumPeidoActionPerformed(evt);
+            }
+        });
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
@@ -354,7 +363,6 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         habilitar();
-        //limparCampos();
         incluindo = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
@@ -367,14 +375,39 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-
         VendasJmbv vendas = viewBean();
 
         Vendas_DAO vendas_DAO = new Vendas_DAO();//executa o dao
         if (incluindo == true) {
+          
         vendas_DAO.insert(vendas);
+            VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
+            VendasProdutoJmbv vendasProdutos = new VendasProdutoJmbv();
+            for(int linha = 0; linha < jTable2.getRowCount(); linha++){
+                vendasProdutos = vendasProdutoControle.getBean(linha);
+                vendasProdutos.setVendasJmbv(vendas);
+                vendasProduto_DAO.insert(vendasProdutos);
+            }
+        
         } else {
         vendas_DAO.update(vendas);
+            VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
+            VendasProdutoJmbv vendasProdutos = new VendasProdutoJmbv();
+            List lista = vendasProduto_DAO.listProdutos(vendas);
+
+            //apagar
+            for(int linha = 0; linha < lista.size(); linha++){
+                vendasProdutos = (VendasProdutoJmbv) lista.get(linha);
+                //vendasProdutos = vendasProdutoControle.getBean(linha);
+                vendasProduto_DAO.delete(vendasProdutos);
+            }
+            
+            //inserir
+            for(int linha = 0; linha < jTable2.getRowCount(); linha++){
+                vendasProdutos = vendasProdutoControle.getBean(linha);
+                vendasProdutos.setVendasJmbv(vendas);
+                vendasProduto_DAO.insert(vendasProdutos);
+            }
         }
         desabilitar();
         limparCampos();
@@ -390,17 +423,23 @@ public class JDlgVendas extends javax.swing.JDialog {
         // TODO add your handling code here:
         int resp = JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar", JOptionPane.YES_NO_OPTION);//null centraliza no meio do monitor//mensagem//titulo//os botoes
 
-        //if(resp == 0){//0 e o sim
-        if (resp == JOptionPane.YES_OPTION) {//constante serve pra deixar  o codigo mais claro//classe usando um metodo estatico, estatico nao precisa instanciar a classe
-
-            VendasJmbv vendas = viewBean();
-            Vendas_DAO vendas_DAO = new Vendas_DAO();//executa o dao
-            vendas_DAO.delete(vendas);
-
-            //vendas_DAO.insert(viewBean());//pra fazer direto
+            VendasJmbv vendas = new VendasJmbv();
+        //if(resp == 0){//0 e o sim            
+        if (Util.perguntar("Deseja excluir o registro?") == true) {
+            Vendas_DAO vendasDAO = new Vendas_DAO();
+                VendasProduto_DAO vendasProdutoDAO = new VendasProduto_DAO();
+                VendasProdutoJmbv vendasProduto;
+                for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+                    vendasProduto = vendasProdutoControle.getBean(linha);
+                    vendasProdutoDAO.delete(vendasProduto);
+                }
+                vendasDAO.delete(vendas);
+            
         } else {
-            JOptionPane.showMessageDialog(null, "Exclusão cancelada.", "Alerta", 2);
+            Util.mensagem("Deve ser realizada uma pesquisa antes");
         }
+        //Util.limparCampos(jTxtNumVendas, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
+        vendas = null;
         limparCampos();
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
@@ -415,6 +454,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         */
 
 
+
         JDlgVendasPesquisa jDlgVendasJmbvPesquisa = new JDlgVendasPesquisa(null, true);
         jDlgVendasJmbvPesquisa.setTelaPai(this);
         jDlgVendasJmbvPesquisa.setVisible(true);
@@ -426,31 +466,29 @@ public class JDlgVendas extends javax.swing.JDialog {
         
         JDlgVendasProduto jDlgVendasJmbvProduto = new JDlgVendasProduto(null, true);
         jDlgVendasJmbvProduto.setTitle("Incluir Produto");
+        jDlgVendasJmbvProduto.setTelaPai(this);
         jDlgVendasJmbvProduto.setVisible(true);
+        
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here:
         JDlgVendasProduto jDlgVendasJmbvProduto = new JDlgVendasProduto(null, true);
         jDlgVendasJmbvProduto.setTitle("Alterar Produto");
+        jDlgVendasJmbvProduto.setTelaPai(this);
+        //int linSel = jTable2.setSelectedItem(linSel);
         jDlgVendasJmbvProduto.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        
-        int resp = JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?", "Confirmar", JOptionPane.YES_NO_OPTION);//null centraliza no meio do monitor//mensagem//titulo//os botoes
-
-        //if(resp == 0){//0 e o sim
-        if (resp == JOptionPane.YES_OPTION) {//constante serve pra deixar  o codigo mais claro//classe usando um metodo estatico, estatico nao precisa instanciar a classe
-
-            //VendasJmbv vendas = viewBean();
-            //VendasJmbv_DAO vendas_DAO = new VendasJmbv_DAO();//executa o dao
-            //vendas_DAO.delete(vendas);
-
-            //vendas_DAO.insert(viewBean());//pra fazer direto
+        int linha = jTable2.getSelectedRow();        
+        if (linha == -1) {
+        Util.mensagem("Nenhuma linha selecionada");
         } else {
-            JOptionPane.showMessageDialog(null, "Exclusão cancelada.", "Alerta", 2);
+            if (Util.perguntar("Confirma exclusão do produto?") == true) {
+                vendasProdutoControle.removeBean(linha);
+            }
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -462,6 +500,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         // TODO add your handling code here:
         System.out.println("valor " + jCboClientes.getSelectedIndex());
     }//GEN-LAST:event_jCboClientesPropertyChange
+
+    private void jTxtNumPeidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNumPeidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNumPeidoActionPerformed
 
     public void limparCampos() {
         //apagar?
@@ -480,9 +522,11 @@ public class JDlgVendas extends javax.swing.JDialog {
         vendas.setIdvendasJmbv(Util.strInt(jTxtNumPeido.getText()));
         vendas.setDataJmbv(Util.strDate(jFmtData.getText()));
         ClientesJmbv clientes1 = (ClientesJmbv) jCboClientes.getSelectedItem();
-        vendas.setClienteJmbv(clientes1.getIdclientesJmbv());
+        //vendas.setClientesJmbv(clientes1.getIdclientesJmbv());
+        vendas.setClientesJmbv(clientes1);
         VendedorJmbv vendedor1 = (VendedorJmbv) jCboVendedor.getSelectedItem();
-        vendas.setVendedorJmbv(vendedor1.getIdvendedorJmbv());
+        //vendas.setVendedorJmbv(vendedor1.getIdvendedorJmbv());
+        vendas.setVendedorJmbv(vendedor1);
         vendas.setValorTotalJmbv(Util.strDouble(jTxtTotal.getText()));
 
         return vendas;
@@ -494,15 +538,56 @@ public class JDlgVendas extends javax.swing.JDialog {
 
         jTxtNumPeido.setText(String.valueOf(vendas.getIdvendasJmbv()));
         jFmtData.setText(Util.dateStr(vendas.getDataJmbv()));
-        jCboClientes.setSelectedItem((vendas.getClienteJmbv()));
-        System.out.println("ccliente" + vendas.getClienteJmbv());
-        jCboVendedor.setSelectedItem(vendas.getVendedorJmbv());
+        //jCboClientes.setSelectedIndex((vendas.getClientesJmbv()));
+        ClientesJmbv cliente1 = vendas.getClientesJmbv();
+        jCboClientes.setSelectedIndex(cliente1.getIdclientesJmbv());
+        //System.out.println("ccliente" + vendas.getClienteJmbv());
+        //jCboVendedor.setSelectedIndex(vendas.getVendedorJmbv());
+        VendedorJmbv vendedor1 = vendas.getVendedorJmbv();
+        jCboVendedor.setSelectedIndex(vendedor1.getIdvendedorJmbv());
+        //jCboVendedor.setSelectedIndex(vendas.getVendedorJmbv());
         jTxtTotal.setText(Util.doubleStr(vendas.getValorTotalJmbv()));
+        
+        
+        VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
+        List lista = vendasProduto_DAO.listProdutos(vendas);
+        //VendasProdutoControle vendasprodutosControle = new VendasProdutoControle();
+        //vendasprodutosControle = new VendasProdutoControle();//invoca o produtos controle para controla-lo
+        /*
+        VendasControle vendasControle = new VendasControle();
+        //vendasprodutosControle.setList(lista);
+        vendasControle.setList(lista);
+        jTable2.setModel(vendasControle);
+        */
+        //vendasprodutosControle.setList(lista);
+        vendasProdutoControle.setList(lista);
+        jTable2.setModel(vendasProdutoControle);
+        Total();
 
         return vendas;
     }
 
     ;
+    
+    private void Total(){
+        double valortot = 0;
+        for(int i = 0; i < jTable2.getRowCount(); i++){
+            System.out.println("for");
+            VendasProdutoJmbv vendasProduto = new VendasProdutoJmbv();
+            vendasProduto = vendasProdutoControle.getBean(i);
+            int quant = vendasProduto.getQuantidadeJmbv();
+            System.out.println("quant" + vendasProduto.getQuantidadeJmbv());
+            double unit = vendasProduto.getValorUnitarioJmbv();
+            System.out.println("unit" + vendasProduto.getValorUnitarioJmbv());
+            valortot += (quant * unit);
+            }
+        jTxtTotal.setText(Util.doubleStr(valortot));
+        System.out.println("valortot " + valortot);
+    }
+    
+    public int getSelectedRowProd(){
+        return(jTable2.getSelectedRow());
+    }
     /**
      * @param args the command line arguments
      */

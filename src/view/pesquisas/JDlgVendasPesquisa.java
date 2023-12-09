@@ -6,10 +6,11 @@
 package view.pesquisas;
 
 import bean.VendasJmbv;
+import dao.VendasProduto_DAO;
 import dao.Vendas_DAO;
 import java.util.List;
 import view.JDlgVendas;
-import view.JDlgVendas2;
+//import view.JDlgVendas2;
 
 /**
  *
@@ -64,6 +65,11 @@ public class JDlgVendasPesquisa extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1_jmbv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1_jmbvMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1_jmbv);
 
         jBtnOK_jmbv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
@@ -118,12 +124,26 @@ public class JDlgVendasPesquisa extends javax.swing.JDialog {
         VendasJmbv vendas = vendasControle.getBean(rowSel);
         jDlgVendas.beanView(vendas);
         setVisible(false);
+        
+//        VendasProduto_DAO vendasProduto_DAO = new VendasProduto_DAO();
+//        List lista = vendasProduto_DAO.listProdutos(vendas);
+//        VendasProdutoControle vendasprodutosControle = new VendasProdutoControle();
+//        //vendasprodutosControle = new VendasProdutoControle();//invoca o produtos controle para controla-lo
+//        vendasprodutosControle.setList(lista);
+//        //jDlgVendas.jTable2.setModel(vendasprodutosControle);
     }//GEN-LAST:event_jBtnOK_jmbvActionPerformed
 
     private void jBtnCancelar_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_jmbvActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jBtnCancelar_jmbvActionPerformed
+
+    private void jTable1_jmbvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1_jmbvMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2){
+            jBtnOK_jmbvActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTable1_jmbvMouseClicked
 
     /**
      * @param args the command line arguments

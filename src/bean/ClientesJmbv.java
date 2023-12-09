@@ -1,11 +1,14 @@
 package bean;
-// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
+// Generated 05/12/2023 09:11:09 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,23 +58,6 @@ public class ClientesJmbv  implements java.io.Serializable {
         this.estadoJmbv = estadoJmbv;
         this.emailJmbv = emailJmbv;
         this.rgJmbv = rgJmbv;
-    }
-    public ClientesJmbv(int idclientesJmbv, String nomeJmbv, String sexoJmbv, Date dataNascimentoJmbv, String contatoJmbv, String cpfJmbv, String cepJmbv, String enderecoJmbv, String numeroJmbv, String cidadeJmbv, String bairroJmbv, String complementoJmbv, String estadoJmbv, String emailJmbv, String rgJmbv) {
-       this.idclientesJmbv = idclientesJmbv;
-       this.nomeJmbv = nomeJmbv;
-       this.sexoJmbv = sexoJmbv;
-       this.dataNascimentoJmbv = dataNascimentoJmbv;
-       this.contatoJmbv = contatoJmbv;
-       this.cpfJmbv = cpfJmbv;
-       this.cepJmbv = cepJmbv;
-       this.enderecoJmbv = enderecoJmbv;
-       this.numeroJmbv = numeroJmbv;
-       this.cidadeJmbv = cidadeJmbv;
-       this.bairroJmbv = bairroJmbv;
-       this.complementoJmbv = complementoJmbv;
-       this.estadoJmbv = estadoJmbv;
-       this.emailJmbv = emailJmbv;
-       this.rgJmbv = rgJmbv;
     }
    
      @Id 
@@ -127,7 +113,7 @@ public class ClientesJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_jmbv", nullable=false, length=12)
+    @Column(name="cpf_jmbv", nullable=false, length=14)
     public String getCpfJmbv() {
         return this.cpfJmbv;
     }
@@ -225,15 +211,10 @@ public class ClientesJmbv  implements java.io.Serializable {
     public void setRgJmbv(String rgJmbv) {
         this.rgJmbv = rgJmbv;
     }
-
-
 @Override
 public String toString() {
 return this.nomeJmbv;
 }
-
-
-
 }
 
 

@@ -31,7 +31,7 @@ public class UsuariosControle extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return 4;
+        return 5;
     }
 
     @Override
@@ -51,6 +51,9 @@ public class UsuariosControle extends AbstractTableModel {
         if (columnIndex == 3) {
             return usuarios.getCpfJmbv();
         }
+        if (columnIndex == 4) {
+            return usuarios.getNivelJmbv();
+        }
 
         return "conteudo";
     }
@@ -69,6 +72,9 @@ public class UsuariosControle extends AbstractTableModel {
         }
         if (column == 3) {
             return "Cpf";
+        }
+        if (column == 4) {
+            return "Nível";
         }
         return "";
     }

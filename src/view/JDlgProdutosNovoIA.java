@@ -29,6 +29,10 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         initComponents();
         //setTitle("Inclusão");
         setLocationRelativeTo(null);
+        
+        if(inclusao){
+        Util.limparCampos(jTxtCodigo_jmbv,jTxtPreco_jmbv, jTxtNome_jmbv, jTxtMarca_jmbv, jFmtValidade_jmbv);
+        }
     }
 
     /**

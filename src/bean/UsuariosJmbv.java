@@ -1,5 +1,5 @@
 package bean;
-// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
+// Generated 05/12/2023 09:11:09 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -86,7 +86,7 @@ public class UsuariosJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_jmbv", nullable=false, length=11)
+    @Column(name="cpf_jmbv", nullable=false, length=14)
     public String getCpfJmbv() {
         return this.cpfJmbv;
     }
@@ -134,14 +134,10 @@ public class UsuariosJmbv  implements java.io.Serializable {
     public void setAtivoJmbv(String ativoJmbv) {
         this.ativoJmbv = ativoJmbv;
     }
-
 @Override
 public String toString() {
 return this.nomeJmbv;
 }
-
-
-
 }
 
 

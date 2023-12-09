@@ -43,6 +43,7 @@ public class Vendas_DAO extends DAO_Abstract {
         session.clear();
         session.delete(object);
         session.getTransaction().commit();
+        //session.close();
     }
 
     @Override

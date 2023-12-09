@@ -18,6 +18,7 @@ public class VendasProdutoControle extends AbstractTableModel {
     
     public void setList(List lista){
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     public VendasProdutoJmbv getBean(int linha){
         return (VendasProdutoJmbv) lista.get(linha);
@@ -31,7 +32,7 @@ public class VendasProdutoControle extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return 5;
+        return 4;
     }
 
     @Override
@@ -39,42 +40,50 @@ public class VendasProdutoControle extends AbstractTableModel {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. return
         VendasProdutoJmbv vendasproduto = (VendasProdutoJmbv) lista.get(rowIndex);
 
+        
         if (columnIndex == 0) {
-            return vendasproduto.getIdvendasProdutoJmbv();
-        }
-        if (columnIndex == 1) {
-            return vendasproduto.getVendasJmbv();
-        }
-        if (columnIndex == 2) {
             return vendasproduto.getProdutosJmbv();
         }
-        if (columnIndex == 3) {
+        if (columnIndex == 1) {
             return vendasproduto.getValorUnitarioJmbv();
         }
-        if (columnIndex == 4) {
+        if (columnIndex == 2) {
             return vendasproduto.getQuantidadeJmbv();
+        }
+        if (columnIndex == 3) {
+            double total = vendasproduto.getQuantidadeJmbv() * vendasproduto.getValorUnitarioJmbv();
+            return total;
         }
 
         return "conteudo";
+    }
+    public void addBean(VendasProdutoJmbv vendasprod){
+        lista.add(vendasprod);
+        this.fireTableDataChanged();
+    }
+    public void updateBean(int index,VendasProdutoJmbv vendasprod){
+        lista.set(index, vendasprod);
+        this.fireTableDataChanged();
+    }
+    public void removeBean(int index){
+        lista.remove(index);
+        this.fireTableDataChanged();
     }
 
     @Override
     public String getColumnName(int column) {
         //colocar o nome nos campos
         if (column == 0) {
-            return "Id";
-        }
-        if (column == 1) {
-            return "Venda";
-        }
-        if (column == 2) {
             return "Produto";
         }
-        if (column == 3) {
+        if (column == 1) {
             return "Valor Unitário";
         }
-        if (column == 4) {
+        if (column == 2) {
             return "Quantidade";
+        }
+        if (column == 3) {
+            return "Total";
         }
         return "";
     }

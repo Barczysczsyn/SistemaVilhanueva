@@ -33,7 +33,7 @@ public class VendedorControle extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return 4;
+        return 5;
     }
 
     @Override
@@ -53,6 +53,9 @@ public class VendedorControle extends AbstractTableModel {
         if (columnIndex == 3) {
             return vendedor.getNumeroJmbv();
         }
+        if (columnIndex == 4) {
+            return vendedor.getDataNascimentoJmbv();
+        }
 
         return "conteudo";
     }
@@ -71,6 +74,9 @@ public class VendedorControle extends AbstractTableModel {
         }
         if (column == 3) {
             return "Celular";
+        }
+        if (column == 4) {
+            return "Data de Nascimento";
         }
         return "";
     }

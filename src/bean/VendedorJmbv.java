@@ -1,11 +1,14 @@
 package bean;
-// Generated 14/11/2023 18:30:52 by Hibernate Tools 4.3.1
+// Generated 05/12/2023 09:11:09 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,19 +50,6 @@ public class VendedorJmbv  implements java.io.Serializable {
         this.bairroJmbv = bairroJmbv;
         this.emailJmbv = emailJmbv;
         this.rgJmbv = rgJmbv;
-    }
-    public VendedorJmbv(int idvendedorJmbv, String nomeJmbv, String cpfJmbv, Date dataNascimentoJmbv, String cepJmbv, String enderecoJmbv, String numeroJmbv, String bairroJmbv, String complementoJmbv, String emailJmbv, String rgJmbv) {
-       this.idvendedorJmbv = idvendedorJmbv;
-       this.nomeJmbv = nomeJmbv;
-       this.cpfJmbv = cpfJmbv;
-       this.dataNascimentoJmbv = dataNascimentoJmbv;
-       this.cepJmbv = cepJmbv;
-       this.enderecoJmbv = enderecoJmbv;
-       this.numeroJmbv = numeroJmbv;
-       this.bairroJmbv = bairroJmbv;
-       this.complementoJmbv = complementoJmbv;
-       this.emailJmbv = emailJmbv;
-       this.rgJmbv = rgJmbv;
     }
    
      @Id 
@@ -125,7 +115,7 @@ public class VendedorJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="numero_jmbv", nullable=false, length=13)
+    @Column(name="numero_jmbv", nullable=false, length=14)
     public String getNumeroJmbv() {
         return this.numeroJmbv;
     }
@@ -145,7 +135,7 @@ public class VendedorJmbv  implements java.io.Serializable {
     }
 
     
-    @Column(name="complemento_jmbv", length=40)
+    @Column(name="complemento_jmbv", length=20)
     public String getComplementoJmbv() {
         return this.complementoJmbv;
     }
@@ -173,15 +163,10 @@ public class VendedorJmbv  implements java.io.Serializable {
     public void setRgJmbv(String rgJmbv) {
         this.rgJmbv = rgJmbv;
     }
-
-
-
 @Override
 public String toString() {
 return this.nomeJmbv;
 }
-
-
 }
 
 

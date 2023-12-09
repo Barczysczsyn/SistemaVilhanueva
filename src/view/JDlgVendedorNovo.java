@@ -175,10 +175,11 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
 
     private void jBtnExcluir_jmbvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_jmbvActionPerformed
         // TODO add your handling code here:
-        if(Util.perguntar("Deseja excluir o produto") == true){
+        if(Util.perguntar("Deseja excluir o vendedor") == true){
             int sel = jTable2_jmbv.getSelectedRow();
             vendedor = vendedorControle.getBean(sel);
             vendedor_DAO.delete(vendedor);
+            atualizar();
         }else{
             Util.mensagem("Exlusão cancelada.");
         }
